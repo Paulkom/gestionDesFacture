@@ -1,0 +1,41 @@
+<div class="rounded border p-2 mt-1">
+    <div class="form-group row">
+        <div class="col-md-2 fv-row">
+            <div class="form-check form-check-custom form-check-solid form-check-lg mt-10">
+                {{ form_widget(form.estActif) }}
+                {{ form_label(form.estActif) }}
+            </div>
+        </div>
+        <div class="col-md-3 fv-row">
+            {{ form_label(form.fonction) }}
+            {{ form_widget(form.fonction) }}
+        </div>
+        <div class="col-md-3 fv-row">
+            {{ form_label(form.dateDebutFonc) }}
+            {{ form_widget(form.dateDebutFonc) }}
+        </div>
+        <div class="col-md-3 fv-row">
+            {{ form_label(form.dateFinFonc) }}
+            {{ form_widget(form.dateFinFonc) }}
+        </div>
+        <div class="col-md-1">
+            {% set id = null %}
+            {% if form.vars.value is not null %}
+                {% set id = form.vars.value.id %}
+            {% endif %}
+            <a href="javascript:void(0);" class="btn btn-icon btn-bg-danger btn-active-color-primary btn-sm collection-action mt-10"
+               data-url="{% if id is not null %}{{ path('app_entity_callandsave', {'class':class, 'action':'del', 'key':id}) }}{% endif %}"
+               data-token="{% if id is not null %}{{ csrf_token('delete' ~ id) }}{% endif %}">
+                <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+                <span class="svg-icon svg-icon-3">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="#FFFFFF"></path>
+                        <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="#FFFFFF"></path>
+                        <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="#FFFFFF"></path>
+                    </svg>
+                </span>
+                <!--end::Svg Icon-->
+            </a>
+        </div>
+    </div>
+</div>

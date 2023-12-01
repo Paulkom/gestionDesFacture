@@ -1,0 +1,73 @@
+<div class="card card-flush">
+    <!--begin::Card header-->
+    <div class="card-header pt-7">
+        <!--begin::Card title-->
+        <div class="card-title">
+            <h2>Détails de la société</h2>
+        </div>
+    </div>
+    <div class="card-body pt-5">
+        <div>
+            <div class="table-responsive">
+                <table class="table align-middle table-row-dashed fs-6 gy-5 ">
+                    <tbody >
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Raison Sociale:</th>
+                            <td>{{ entitie.raisonSociale }}</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Sigle:</th>
+                            <td>{{ entitie.sigle }}</td>
+                        </tr>
+                         <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Dénomination:</th>
+                            <td>{{ entitie.denomination }}</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Lieu d'impression:</th>
+                            <td>{{ entitie.lieuImpression }}</td>
+                        </tr>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Ifu:</th>
+                            <td>{{ entitie.ifu }}</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Rccm:</th>
+                            <td>{{ entitie.rccm }}</td>
+                        </tr>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Téléphone:</th>
+                            <td>{{ entitie.telephone }}</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Adresse:</th>
+                            <td>{{ entitie.adresse }}</td>
+                        </tr>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Entete:</th>
+                            <td colspan="3"> 
+                                {% if entitie.entete %}
+                                <img src="{{ asset(medias_directory ~ 'societe/' ~ entitie.entete.id ~ '.' ~ entitie.entete.extension)  }}" style="width: 100%;height: 100%;" alt="">
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Logo:</th>
+                            <td colspan="3"> 
+                                {% if entitie.logo %}
+                                <img src="{{ asset(medias_directory ~ 'societe/' ~ entitie.logo.id ~ '.' ~ entitie.logo.extension)  }}" style="width: 100%;height: 100px;" alt="">
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Pied de page:</th>
+                            <td colspan="3"> 
+                                {% if entitie.piedDePage %}
+                                <img src="{{ asset(medias_directory ~ 'societe/' ~ entitie.piedDePage.id ~ '.' ~ entitie.piedDePage.extension)  }}" style="width: 100%;height: 100px;" alt="">
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

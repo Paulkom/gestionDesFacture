@@ -1,0 +1,81 @@
+<div class="card card-flush">
+    <!--begin::Card header-->
+    <div class="card-header pt-7">
+        <!--begin::Card title-->
+        <div class="card-title">
+            <h2>Détails de la facture {{ entitie.refCom }}</h2>
+        </div>
+    </div>
+    <div class="card-body pt-5">
+        <div>
+            <div class="table-responsive">
+                <table class="table align-middle table-row-dashed fs-6 gy-5 ">
+                    <tr>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Date Com.:</th>
+                        <td>{{ entitie.dateCom ? entitie.dateCom|date('d-m-Y à H:i:s') : '' }}</td>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase" >Reference:</th>
+                        <td class="fw-bolde">{{ entitie.refCom }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Client.:</th>
+                        <td colspan="3">{{ entitie.acheteur.nomClient }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant HT:</th>
+                        <td>{{ entitie.montantHt | number_format(2, ',', ' ')}} F CFA</td>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant HT après remise:</th>
+                        <td class="fw-bolde">{{ entitie.montantHtToAprRse | number_format(2, ',', ' ')}} F CFA</td>
+                    </tr>
+                    <tr>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase" >Montant TVA:</th>
+                        <td>{{ entitie.montantTva | number_format(2, ',', ' ')}} F CFA</td>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant TTC:</th>
+                        <td class="fw-bolde">{{ entitie.montantTtc| number_format(2, ',', ' ') }} F CFA</td>
+                    </tr>
+                     <tr>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Statut:</th>
+                        <td class="fw-bolde">
+                           {% if entitie.statut == "En attente" %}<div class='badge badge-light-primary fw-bold'>{{ entitie.statut }}</div>{% endif %}
+                           {% if entitie.statut == "Livrer" %}<div class='badge badge-success fw-bold'>{{ entitie.statut }}</div>{% endif %}
+                           {% if entitie.statut == "payer" %}<div class='badge badge-light-success fw-bold'>{{ entitie.statut }}</div>{% endif %}
+                           {% if entitie.statut == "Annuler" %}<div class='badge badge-light-danger fw-bold'>{{ entitie.statut }}</div>{% endif %}
+                        </td>
+                        <th></th>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <h4 class="mt-10"> Liste des produits commandés. <span class="text-danger">(Les prix et les montants sont en Francs CFA)</span></h4>
+            <div class="table-responsive">
+                <table class="table align-middle table-row-dashed fs-6 gy-5 ">
+                    <thead> 
+                        <tr class="text-gray-500 fw-bolder fs-7 text-uppercase">
+                            <th class="min-w-200px ">Designation</th>
+                            <th class="min-w-80px">Qte</th>
+                            <th class="min-w-100px">Prix Uni</th> 
+                            <th class="min-w-100px">Prix Uni HT</th> 
+                            <th class="min-w-90px">REM.</th>
+                            <th class="min-w-125px">MT.HT</th> 
+                            <th class="min-w-125px">MT. HT apr. Rem.</th> 
+                            <th class="min-w-90px">MT. TVA</th> 
+                            <th class="min-w-125px">MT. TTC</th> 
+                        </tr> 
+                    </thead> 
+                    {% for c in entitie.produitCondComClits  %}
+                        <tr> 
+                            <td>{{ c.produit }}</td>
+                            <td>{{c.qtite | number_format(2, ',', ' ')}}</td>
+                            <td>{{c.prix | number_format(2, ',', ' ')}}</td>
+                            <td>{{c.prixHt | number_format(2, ',', ' ')}}</td>
+                            <td>{{c.remise == null ? (0 | number_format(2, ',', ' ')) : c.remise| number_format(2, ',', ' ') }}</td>
+                            <td>{{c.montant | number_format(2, ',', ' ')}}</td>
+                            <td>{{c.montantHtAprRse | number_format(2, ',', ' ')}}</td>
+                            <td>{{c.montantTvap | number_format(2, ',', ' ')}}</td>
+                            <td>{{c.montantTtcp | number_format(2, ',', ' ')}}</td>
+                        </tr>
+                    {% endfor %}    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

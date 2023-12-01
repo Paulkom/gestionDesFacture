@@ -1,0 +1,50 @@
+<div class="card card-flush">
+    <!--begin::Card header-->
+    <div class="card-header pt-7">
+        <!--begin::Card title-->
+        <div class="card-title">
+            <h2>Détails du paiement {{ entitie.refPaie }}</h2>
+        </div>
+    </div>
+    <div class="card-body pt-5">
+        <div>
+            <div class="table-responsive">
+                <table class="table align-middle table-row-dashed fs-6 gy-5 ">
+                    <tbody>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Facture:</th>
+                            <td>{{ entitie.facture }}</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Client:</th>
+                            <td>{{ entitie.facture.commandeCli.acheteur.nom  ~ ' ' ~ entitie.facture.commandeCli.acheteur.prenom }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">DatePaie:</th>
+                            <td>{{ entitie.datePaie ? entitie.datePaie|date('d-m-Y') : '' }}</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Référence:</th>
+                            <td>{{ entitie.refPaie }}</td>
+                        </tr>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Mode de paiement:</th>
+                            <td>{{entitie.modePaiement.libelle}}</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Montant dû:</th>
+                            <td>{{ entitie.facture.montantTotal | number_format(2, ',', ' ')}} F CFA</td>
+                        </tr>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Montant Payé:</th>
+                            <td>{{ entitie.montantPaye | number_format(2, ',', ' ')}} F CFA</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Montant Restant:</th>
+                            <td>{{ entitie.montantRAPayer | number_format(2, ',', ' ')}} F CFA</td>
+                        </tr>
+                        <tr>
+                            <th class="fw-bolder fs-7 text-uppercase">Montant Reçu:</th>
+                            <td>{{ entitie.montantRecu| number_format(2, ',', ' ') }} F CFA</td>
+                            <th class="fw-bolder fs-7 text-uppercase">Reliquat:</th>
+                            <td>{{ entitie.reliquat| number_format(2, ',', ' ')}} F CFA</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

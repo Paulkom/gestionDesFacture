@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="toolbar" id="kt_toolbar">
+            <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack"><div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Paiement</h1>
+                    <span class="h-20px border-gray-300 border-start mx-4"></span>
+                    <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+                        <li class="breadcrumb-item text-muted">
+                            <a href="{{ path('principal') }}" class="text-muted text-hover-primary">Accueil</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                        </li>
+                        <li class="breadcrumb-item text-dark">Ajouter un paiement</li>
+                    </ul>
+                </div>
+                <div class="d-flex align-items-center gap-2 gap-lg-3">
+                    <a type="button" class="btn  btn-sm btn-flex btn-light btn-active-primary fw-bolder"
+                     data-url="{{ path('app_entity_liste', {'class':'Paiement','action':'list'}) }}" data-kt-entity-table-filter="list">
+                        Liste des paiements </a>
+                    {# <a href="#" class="btn btn-sm btn-light-primary" data-url="{{ path('app_entity_liste', {'class':'Facture','action':'list'}) }}"
+                        data-kt-entity-table-filter="list">Liste des factures</a> #}
+                    <a type="button" class="btn btn-sm btn-primary" data-kt-entity-table-filter="new_form">Ajouter un paiement</a>
+                </div>
+            </div>
+        </div>
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container-xxl">
+                <div class="row g-12" data-call-form="ajax"  data-content="{% autoescape 'html' %}{{ include('paiement/partials/_card_form.html.twig')|escape }}{% endautoescape %}">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('assets/js/custom/apps/paiement/paiement.js') }}"></script>
+    <script>
+        /*$(document).ready(function () {
+            let seletcom = $(container).find('select[name*="paiement[facture]"]');
+            var selected = $(seletcom).find('option:selected').val();
+            if(seletcom){
+                seletcom.change(function () {
+                    selected = $(this).find('option:selected').val();
+                    var option = $(this).find('option:selected');
+                    var montantini  = option.data('montantini');
+                    var montantrest   = option.data('montantrest');
+                    if(montantrest == '0' || montantrest=='') montantrest = montantini;
+                    if(montantrest != '0'){
+                        $(container).find('input[name*="paiement[montantFacture]"]').val(montantrest);
+                        $(container).find('input[name*="paiement[montantPaye]"]').val(montantrest);
+                        $(container).find('input[name*="paiement[montantRAPayer]"]').val(0);
+                    } 
+                   /* if(selected){
+                        $(button).attr('disabled',false);
+                    }else{
+                        $(button).attr('disabled',true);
+                    }
+
+                });
+            }
+        })*/
+        
+    </script>
+{% endblock %}

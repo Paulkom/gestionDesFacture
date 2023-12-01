@@ -1,0 +1,132 @@
+{{ form_start(form) }}
+    <div>
+        <div class="form-group row">
+            <div class="col  fv-row box d-flex flex-column justify-content-center align-items-start">
+                <label class="form-check form-check-sm form-check-custom form-check-solid float-start">
+                    {{ form_widget(form.estAdmin) }}
+                    <span class="form-check-label">
+                        {{ form.estAdmin.vars.label }}
+                    </span>
+                </label>
+            </div> 
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.prenom) }}
+                {{ form_widget(form.prenom) }}
+            </div>
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.profession) }}
+                {{ form_widget(form.profession) }}
+            </div> 
+        </div>
+        <div class="row">
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username) }}
+            </div> 
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.tel) }}
+                {{ form_widget(form.tel) }}
+            </div> 
+        </div>
+        <div class="row">
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.password.first) }}
+                {{ form_widget(form.password.first) }}
+                {{ form_errors(form.password.first) }}
+                {# <div class="fv-plugins-message-container invalid-feedback"></div> #}
+            </div> 
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.password.second) }}
+                {{ form_widget(form.password.second) }}
+                {{ form_errors(form.password.second) }}
+                {# <div class="fv-plugins-message-container invalid-feedback"></div> #}
+            </div> 
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.profil) }}
+                {{ form_widget(form.profil) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+        </div>
+        <div class="mb-5 fv-row fv-plugins-icon-container">
+            {{ form_label(form.adresse) }}
+            {{ form_widget(form.adresse) }}
+        </div>
+         
+        <div class="row">
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.dateNais) }}
+                {{ form_widget(form.dateNais) }}
+            </div>
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.sexe) }}
+                {{ form_widget(form.sexe) }}
+            </div> 
+            <div class="mb-5 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.civilite) }}
+                {{ form_widget(form.civilite) }}
+            </div> 
+        </div>
+
+        {# <div class="py-5">
+            <div class="rounded border p-2">
+                <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-5" role="tablist">
+                    <!--begin:::Tab item-->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link text-active-primary pb-5 active" data-bs-toggle="tab" href="#kt_ecommerce_settings_general" aria-selected="true" role="tab">
+                            Fonction
+                        </a>
+                    </li>
+                    <!--end:::Tab item-->
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <!--begin:::Tab pane-->
+                    <div class="tab-pane fade active show clearfix" id="kt_ecommerce_settings_general" role="tabpanel">
+                       
+                        {% set prefix = 'collection-form-med___' ~ form.fonctionPersonnels.vars.name ~ '__' %}
+                        <div class="row collection-form-med" data-collection-prefix="{{ prefix }}"
+                            data-collection-key = "__{{ form.fonctionPersonnels.vars.name }}__"
+                            data-index="{{ form.fonctionPersonnels|length > 0 ? form.fonctionPersonnels|last.vars.name + 1 : 0 }}"
+                            data-prototype="{% autoescape 'html' %}{{ include('personnel/partials/_fonction.prototype.html.twig',
+                                { 'form': form.fonctionPersonnels.vars.prototype, 'class':'fonction' })|escape }}{% endautoescape %}">
+                            {% for key,m in form.fonctionPersonnels %}
+                                <div class="ligne form-child" data-index="{{ key }}" id="{{ 'collection-form-med_' ~ key }}">
+                                    {{ include('personnel/partials/_fonction.prototype.html.twig',
+                                        { 'form': m, 'class':'fonction' }) }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group mt-2 float-start">
+                            <a href="javascript:;" class="btn btn-light-success add_item_link"
+                            data-collection-holder-class="collection-form-med">
+                                <i class="la la-plus"></i>Ajouter une fonction
+                            </a>
+                        </div>
+
+                    </div>
+                    <!--end:::Tab pane-->
+                </div>
+            </div>
+        </div> #}
+
+        <div class="mb-5 fv-row fv-plugins-icon-container">
+            <button type="submit" class="btn btn-primary">
+                <span class="indicator-label">
+                    Enregistrer
+                </span>
+                <span class="indicator-progress">
+                    Veuillez patienter svp... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+{{ form_end(form) }} 
+

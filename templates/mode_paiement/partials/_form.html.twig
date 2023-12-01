@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+    <div>
+        <div class="row">
+            <div class="mb-5 fv-row fv-plugins-icon-container col-4">
+                {{ form_label(form.code) }}
+                {{ form_widget(form.code) }}
+                {# <div class="fv-plugins-message-container invalid-feedback"></div> #}
+            </div>
+            <div class="mb-5 fv-row fv-plugins-icon-container col-8">
+                {{ form_label(form.libelle) }}
+                {{ form_widget(form.libelle) }}
+            </div>
+        </div>
+        <div class="mb-5 fv-row fv-plugins-icon-container">
+            <!--begin::Button-->
+            <button type="reset" data-kt-cond-type="cancel" class="btn btn-light me-3">Vider</button>
+            <!--end::Button-->
+            <button type="submit" class="btn btn-primary">
+                <span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer</span>
+                <span class="indicator-progress">Veuillez patienter svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+{{ form_end(form) }} 
+

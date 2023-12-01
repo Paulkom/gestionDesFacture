@@ -1,0 +1,74 @@
+<div class="card card-flush py-0" data-menu="kt_personnel_show">
+    <!--begin::Card body-->
+    <div class="card-body py-5">
+        <div class="mb-10 mb-lg-0">
+            <!--begin::Description-->
+            <div class="m-0">
+                <!--begin::Header-->
+                <div class="py-3 d-flex flex-stack flex-wrap">
+                    <!--begin::Toggle-->
+                    <div class="d-flex align-items-center">
+                        <!--begin::Summary-->
+                        <div class="me-3">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-1 text-gray-800 w-bolder">
+                                    Personnel #{{ personnel.id }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Summary-->
+                    </div>
+                    <!--end::Toggle-->
+
+                 
+                </div>
+                <!--end::Header-->
+
+
+                <div class="table-responsive">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5 ">
+                        <tbody>
+                            <tr>
+                                <th class="fw-bolder fs-7 text-uppercase">Nom:</th>
+                                <td>{{ personnel.nom }}</td>
+                                <th class="fw-bolder fs-7 text-uppercase">Prénoms:</th>
+                                <td>{{ personnel.prenoms }}</td>
+                            </tr>
+                            <tr>
+                                <th class="fw-bolder fs-7 text-uppercase">Téléphone:</th>
+                                <td>{{ personnel.tel }}</td>
+                                <th class="fw-bolder fs-7 text-uppercase">Date Naissance:</th>
+                                <td>{{ personnel.dateNais|date('d/m/Y') }}</td>
+                            </tr>
+                            <tr>
+                                <th class="fw-bolder fs-7 text-uppercase">Sexe :</th>
+                                <td>{{ personnel.sexe }}</td>
+                                <th class="fw-bolder fs-7 text-uppercase">Civilité:</th>
+                                <td>{{ personnel.civilite }}</td>
+                            </tr>                       
+                            <tr>
+                                <th class="fw-bolder fs-7 text-uppercase">Adresse:</th>
+                                <td colspan="3">{{ personnel.adresse }}</td>
+                            </tr>
+                            <tr>
+                                <th class="fw-bolder fs-7 text-uppercase">Fonction:</th>
+                                <td colspan="3">{{ personnel.nom }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!--end::Description-->
+
+            <!--begin::Accordion-->
+
+           
+
+           
+
+            <!--end::Accordion-->
+        </div>
+    </div>
+    <!--end::Card body-->
+</div>

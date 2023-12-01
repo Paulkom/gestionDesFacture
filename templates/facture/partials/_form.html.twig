@@ -1,0 +1,331 @@
+{% block stylesheets %}
+    <style>
+        {# .row >* {
+            flex-shrink: 0;
+            width: 100%;
+            max-width: 100%;
+            padding-right: calc(var(--bs-gutter-x) * .5); 
+            padding-left: calc(var(--bs-gutter-x) * .5);
+            margin-top: var(--bs-gutter-y);
+        } #}
+    </style>
+{% endblock %}
+
+{{ form_start(form) }}
+<div class="card shadow-sm">
+    <div class="card-header pt-7">
+        <div class="row g-2">
+            <div class="mb-3 fv-row fv-plugins-icon-container col">
+                {{ form_label(form.dateCom) }}
+                {{ form_widget(form.dateCom) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.montantHt) }}
+                {{ form_widget(form.montantHt) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+             <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.montantHtToAprRse) }}
+                {{ form_widget(form.montantHtToAprRse) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+             <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.montantTva) }}
+                {{ form_widget(form.montantTva) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.montantAib) }}
+                {{ form_widget(form.montantAib) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.montantTtc) }}
+                {{ form_widget(form.montantTtc) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+        </div>
+
+        <div class="row g-2">
+             <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.typeCommande) }}
+                {{ form_widget(form.typeCommande) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="mb-3 fv-row fv-plugins-icon-container col-sm-3">
+                {{ form_label(form.acheteur) }}
+                {{ form_widget(form.acheteur) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.dateLivPrev) }}
+                {{ form_widget(form.dateLivPrev) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="mb-3 fv-row fv-plugins-icon-container col-sm-1">
+                {{ form_label(form.tauxAib) }}
+                {{ form_widget(form.tauxAib) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.montantRecu) }}
+                {{ form_widget(form.montantRecu) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+            <div class="mb-3 fv-row fv-plugins-icon-container col-sm">
+                {{ form_label(form.reliquat) }}
+                {{ form_widget(form.reliquat) }}
+                {{ form_widget(form.checknet) }}
+                <div class="fv-plugins-message-container invalid-feedback"></div>
+            </div>
+        </div>
+    </div>
+     <div> 
+        <div class="col-lg-12 col-sm-12">
+            <div class="bg-light-primary h-100 px-10 pt-2" id="kt_docs_swapper_parent_2">
+                <div class="row"> 
+                    <div class="col-sm-9 col-lg-9 pt-2">
+                        <div class="fw-bolder">Ajouter les produits demandés par le client avec la quantité</div>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <div class="d-flex justify-content-end">
+                            <a href="javascript:;" class="btn btn-sm btn-primary add_vente_item_link" data-collection-holder-class="collection-form">
+                                <i class="la la-plus"></i>Ajouter un produit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="separator my-2"></div>
+               {# <div class="row g-2">
+                    <div class="mb-1 col-sm-3">
+                        <label class="form-label required" for="">Produit</label>
+                    </div>
+                    <div class="mb-1 col-sm">
+                        <label class="form-label required" for="">Prix</label>
+                    </div>
+                    <div class="mb-1 col-sm-1">
+                        <label class="form-label required" for="">Quantité</label>
+                    </div>
+                    <div class="mb-1 col-sm-1">
+                        <label class="form-label" for="">Type Rse.</label>
+                    </div>
+                    <div class="mb-1 col-sm-1">
+                        <label class="form-label" for="">Valeur Rse.</label>
+                    </div>
+                    <div class="mb-1 col-sm-1">
+                        <label class="form-label" for="">MT. Rse.</label>
+                    </div>
+                    <div class="mb-1 col-sm">
+                        <label class="form-label required" for="">Montant HT</label>
+                    </div>
+                    <div class="mb-1 col-sm">
+                        <label class="form-label required" for="">MT HT Ap Rse</label>
+                    </div>
+                    <div class="mb-1 col-sm-1">
+                        <label class="form-label" for="">Actions</label>
+                    </div> 
+                </div> #}
+            </div>
+        </div>
+    </div>
+    <div class="px-10 py-2">
+        <div class="table-responsive">
+            <table class="table table-bordered gs-1 gy-2 gx-1">
+                <thead class="bg-light-primary">
+                    <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                        <th class="min-w-125px max-w-200px">Produit</th>
+                        <th class="min-w-90px">Prix Uni</th>
+                        <th class="min-w-90px">Prix HT</th>
+                        <th class="min-w-90px">Quantité</th>
+                        <th class="min-w-125px">Montant HT</th>
+                        <th class="min-w-125px">Taxe S.</th>
+                        <th class="min-w-90px">type Rse.</th>
+                        <th class="min-w-80px">V/Rse.</th>
+                        <th class="min-w-90px">MT. Rse.</th>
+                        <th class="min-w-125px">MT. HT Ap Rse</th>
+                        <th class="min-w-125px">MT. TVA</th>
+                        <th class="min-w-125px">MT. TTC</th>
+                        <th class="min-w-125px">Magasin</th>
+                        <th class="min-w-80px">stock</th>
+                        <th class="min-w-50px"></th>
+                    </tr>
+                </thead>
+                <tbody class="collection-form" data-index="{{ form.produitCondComClits|length > 0 ? form.produitCondComClits|last.vars.name + 1 : 0 }}"
+                    data-prototype="{% autoescape 'html' %}{{ include('commandes/partials/_prod_cond_com_clit.prototype.html.twig',
+                    { 'form': form.produitCondComClits.vars.prototype, 'class':'CommandeClient' })|escape }}{% endautoescape %}">
+                    {% if form.produitCondComClits | length > 0 %}
+                        {% for key, p in form.produitCondComClits %}
+                            {% if key > 0 %}
+                                {% set length = form.produitCondComClits|length %}
+                                {{ include('commandes/partials/_prod_cond_com_clit.prototype.html.twig',
+                                    { 'form': p, 'length':length }) }}
+                            {% else %}
+                                {{ include('commandes/partials/_prod_cond_com_clit.prototype.html.twig',
+                                    { 'form': p }) }}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {{ form_row(form.produitCondComClits) }}
+                    {% endif %}  
+                </tbody>
+            </table>
+        </div>
+        {# <div class="collection-form" data-index="{{ form.produitCondComClits|length > 0 ? form.produitCondComClits|last.vars.name + 1 : 0 }}"
+            data-prototype="{% autoescape 'html' %}{{ include('commandes/partials/_prod_cond_com_clit.prototype.html.twig',
+            { 'form': form.produitCondComClits.vars.prototype, 'class':'CommandeClient' })|escape }}{% endautoescape %}">
+            {% if form.produitCondComClits | length > 0 %}
+                {% for key, p in form.produitCondComClits %}
+                    {% if key > 0 %}
+                        {% set length = form.produitCondComClits|length %}
+                        {{ include('commandes/partials/_prod_cond_com_clit.prototype.html.twig',
+                            { 'form': p, 'length':length }) }}
+                    {% else %}
+                        {{ include('commandes/partials/_prod_cond_com_clit.prototype.html.twig',
+                            { 'form': p }) }}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {{ form_row(form.produitCondComClits) }}
+            {% endif %}  
+        </div> #}
+        <div class="form-group">
+            <a href="javascript:;" class="btn btn-sm btn-light-primary add_vente_item_link" data-collection-holder-class="collection-form">
+                <i class="la la-plus"></i>Ajouter un produit
+            </a>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <button type="reset" data-kt-cond-type ="cancel" class="btn btn-light me-3">Vider</button>
+            <!--end::Button-->
+            <button type="submit" id="com_submit" data-kt-cond-type="submit" class="btn btn-primary me-3 imprimer">
+                <span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer et Imprimer</span>
+                <span class="indicator-progress">Veuillez patienter svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+            </button>
+            <!--begin::Button-->
+            <button type="submit" id="com_submit" data-kt-cond-type="submit" class="btn btn-primary">
+                <span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer</span>
+                <span class="indicator-progress">Veuillez patienter svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+            </button>
+            <!--end::Button-->
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="kt_modal_scrollable_2">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter un nouveau client</h5>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x"></span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div data-kt-buttons="true">
+                        {% for child in form.statut.children %}
+                            <label for="{{ child.vars.id }}" class="btn btn-outline btn-outline-dashed flex-stack text-start py-2 px-4">
+                                <div class="d-flex align-items-center me-2">
+                                    <div class="form-check form-check-custom form-check-solid form-check-primary me-2">
+                                        {{ form_widget(child, {'attr': {'class': 'form-check-input'} }) }}
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="d-flex align-items-center fs-3 pt-2 fw-bolder flex-wrap">
+                                            {{ child.vars.label }}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div><br>
+
+                <div class="row">
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.nom) }}
+                        {{ form_widget(form.nom) }}
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.prenom) }}
+                        {{ form_widget(form.prenom) }}
+                    </div>
+                </div>
+                <div class="mb-3 fv-row fv-plugins-icon-container">
+                    {{ form_label(form.denomination) }}
+                    {{ form_widget(form.denomination) }}
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+                <div class="mb-3 fv-row fv-plugins-icon-container">
+                    {{ form_label(form.raisonSociale) }}
+                    {{ form_widget(form.raisonSociale) }}
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.sigle) }}
+                        {{ form_widget(form.sigle) }}
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div> 
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.ifu) }}
+                        {{ form_widget(form.ifu) }}
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="mb-3 fv-row fv-plugins-icon-container">
+                    {{ form_label(form.rccm) }}
+                    {{ form_widget(form.rccm) }}
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.telephone1) }}
+                        {{ form_widget(form.telephone1) }}
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div> 
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.telephone2) }}
+                        {{ form_widget(form.telephone2) }}
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.adresse) }}
+                        {{ form_widget(form.adresse) }}
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div>
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="mb-3 fv-row fv-plugins-icon-container col">
+                        {{ form_label(form.dateNais) }}
+                        {{ form_widget(form.dateNais) }}
+                        <div class="fv-plugins-message-container invalid-feedback"></div>
+                    </div> 
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="annuler" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                 <button type="button" id="ajouter" class="btn btn-primary" data-bs-dismiss="modal">Ajouter le client</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}
+        

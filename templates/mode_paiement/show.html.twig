@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ModePaiement{% endblock %}
+
+{% block body %}
+    <h1>ModePaiement</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ mode_paiement.id }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ mode_paiement.code }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ mode_paiement.libelle }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ mode_paiement.createdAt ? mode_paiement.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ mode_paiement.updatedAt ? mode_paiement.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_mode_paiement_index') }}">back to list</a>
+
+    <a href="{{ path('app_mode_paiement_edit', {'id': mode_paiement.id}) }}">edit</a>
+
+    {{ include('mode_paiement/_delete_form.html.twig') }}
+{% endblock %}

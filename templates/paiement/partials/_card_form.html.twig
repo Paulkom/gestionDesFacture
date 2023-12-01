@@ -1,0 +1,72 @@
+{{ form_start(form) }}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="row">
+            <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.datePaie) }}
+                {{ form_widget(form.datePaie) }}
+            </div>
+            <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.facture) }}
+                {{ form_widget(form.facture) }}
+            </div>
+            <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.modePaiement) }}
+                {{ form_widget(form.modePaiement) }}
+                <div class="solde-client"></div>
+            </div>
+            {# <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.banque) }}
+                {{ form_widget(form.banque) }}
+            </div>   #}
+            {# <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.numeroMobileMoney) }}
+                {{ form_widget(form.numeroMobileMoney) }}
+            </div>
+            <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.refOperation) }}
+                {{ form_widget(form.refOperation) }}
+            </div> #}
+            <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.montantFact) }}
+                {{ form_widget(form.montantFact) }}
+            </div>  
+            <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.montantPaie) }}
+                {{ form_widget(form.montantPaie) }}
+            </div>
+            <div class="mb-5 fv-row  col-sm-4 ">
+                {{ form_label(form.restAPayer) }}
+                {{ form_widget(form.restAPayer) }}
+            </div>
+        </div>
+
+        <div class="historiquePaiementsFacture d-none">
+            <h3 class="mt-2">Historique des paiements de la facture : <span class="historiquePaiementsFacture-title"></span> de <span class="historiquePaiementsFacture-name"></span> </h3>
+            <div class="separator mb-2"></div>
+            <div class=" row historiquePaiementsFacture-content">
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div class="d-flex justify-content-end">
+            <!--begin::Button-->
+            <button type="reset" data-kt-cond-type="cancel" class="btn btn-light me-3">Vider</button>
+            <button type="submit" id="com_submit" data-kt-cond-type="submit" class="btn btn-primary me-3 imprimer">
+                <span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer et Imprimer</span>
+                <span class="indicator-progress">Veuillez patienter svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+            </button>
+            <button type="submit" id="com_submit" data-kt-cond-type="submit" class="btn btn-primary">
+                <span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer</span>
+                <span class="indicator-progress">Veuillez patienter svp...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}
+        

@@ -1,0 +1,132 @@
+{{ form_start(form) }}
+    <div class="d-flex flex-column gap-5">
+        <div class="form-group row">
+            <div class="col  fv-row box d-flex flex-column justify-content-center align-items-start">
+                <label class="form-check form-check-sm form-check-custom form-check-solid float-start">
+                    {{ form_widget(form.estAdmin) }}
+                    <span class="form-check-label">
+                        {{ form.estAdmin.vars.label }}
+                    </span>
+                </label>
+            </div> 
+            <div class="col  fv-row box d-flex flex-column justify-content-center align-items-start">
+                <label class="form-check form-check-sm form-check-custom form-check-solid float-start">
+                    {{ form_widget(form.estModeDeConnexion) }}
+                    <span class="form-check-label">
+                        {{ form.estModeDeConnexion.vars.label }}
+                    </span>
+                </label>
+            </div> 
+            
+            <div class="col-md-6 fv-row">
+                {{ form_label(form.sigle) }}
+                {{ form_widget(form.sigle) }}
+            </div> 
+        </div>
+        <div class="form-group row">
+            <div class="col fv-row">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="col fv-row">
+                {{ form_label(form.raisonSocial) }}
+                {{ form_widget(form.raisonSocial) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col fv-row">
+                {{ form_label(form.rccm) }}
+                {{ form_widget(form.rccm) }}
+            </div>
+            <div class="col fv-row">
+                {{ form_label(form.ifu) }}
+                {{ form_widget(form.ifu) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col fv-row">
+                {{ form_label(form.adresse) }}
+                {{ form_widget(form.adresse) }}
+            </div>
+             <div class="col fv-row">
+                {{ form_label(form.messageCommercial) }}
+                {{ form_widget(form.messageCommercial) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="cursor-pointer col fv-row">
+                {{ form_label(form.logo.file,"Joindre le logo") }}
+                {{ form_widget(form.logo.file) }}
+                <div class="input-group media">
+                    {{ form_widget(form.logo.nomMedia) }}
+                    <span class="input-group-text" id="basic-addon2">
+                        Logo
+                    </span>
+                </div>
+            </div>
+            <div class="cursor-pointer fv-row col">
+                {{ form_label(form.entete.file,"Joindre l'entête") }}
+                {{ form_widget(form.entete.file) }}
+                <div class="input-group media">
+                    {{ form_widget(form.entete.nomMedia) }}
+                    <span class="input-group-text" id="basic-addon2">
+                        Entête
+                    </span>
+                </div>
+            </div>
+            <div class="cursor-pointer fv-row col">
+                {{ form_label(form.piedDePage.file,"Joindre le pied de page") }}
+                {{ form_widget(form.piedDePage.file) }}
+                <div class="input-group media">
+                    {{ form_widget(form.piedDePage.nomMedia) }}
+                    <span class="input-group-text" id="basic-addon2">
+                        Pied De Page
+                    </span>
+                </div>
+            </div>
+        </div> 
+        <div class="form-group row">
+            <div class="col fv-row">
+                {{ form_label(form.apiLink) }}
+                {{ form_widget(form.apiLink) }}
+            </div>
+            <div class="col-md-5 fv-row">
+                {{ form_label(form.apiNim) }}
+                {{ form_widget(form.apiNim) }}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col fv-row">
+                {{ form_label(form.apiToken) }}
+                {{ form_widget(form.apiToken) }}
+            </div>
+        </div>
+        <div class="col-md-4 d-none ">
+            {{ form_label(form.logo.numMedia) }}
+            {{ form_widget(form.logo.numMedia) }}
+        </div>
+        <div class="col-md-4 d-none ">
+            {{ form_label(form.entete.numMedia) }}
+            {{ form_widget(form.entete.numMedia) }}
+        </div>
+        <div class="col-md-4 d-none ">
+            {{ form_label(form.piedDePage.numMedia) }}
+            {{ form_widget(form.piedDePage.numMedia) }}
+        </div>
+    </div>
+    <div class="separator mb-3"></div>
+    <div class="d-flex justify-content-end">
+        <!--begin::Button-->
+        <button type="reset" data-kt-cond-type="cancel" class="btn btn-light me-3">Vider</button>
+        <!--end::Button-->
+        <!--begin::Button-->
+        <button type="submit" id="condi_submit" data-kt-cond-type="submit" class="btn btn-primary">
+            <span class="indicator-label">Enregistrer</span>
+            <span class="indicator-progress">Veuillez patienter svp...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+            </span>
+        </button>
+        <!--end::Button-->
+    </div>
+{{ form_end(form) }} 
+

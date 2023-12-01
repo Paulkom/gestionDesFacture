@@ -1,0 +1,140 @@
+{% block stylesheets %}
+    <style>
+    
+    </style>
+{% endblock %}
+
+
+
+{{ form_start(form) }}
+    <div class="card shadow-sm">
+        <div class="card-header pt-7">
+             <div class="row g-2" style=" width:100%;">
+                <div class="mb-3 fv-row fv-plugins-icon-container col">
+                    {{ form_label(form.dateFac) }}
+                    {{ form_widget(form.dateFac) }}
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+                <div class="mb-3 fv-row fv-plugins-icon-container col">
+                    {{ form_label(form.montantFac) }}
+                    {{ form_widget(form.montantFac) }}
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div>
+                {# <div class="mb-3 fv-row fv-plugins-icon-container col">
+                    {{ form_label(form.montantHtToAprRse) }}
+                    {{ form_widget(form.montantHtToAprRse) }}
+                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                </div> #}
+                
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="bg-light-primary px-10 ">
+                <div class="row">
+                    <h3 class="card-title fw-bolder py-3 pt-4 fs-7 d-flex col-sm-9 col-lg-9">Ajouter une ligne</h3>
+                     <div class="d-flex justify-content-end col-sm-3 col-lg-3">
+                        <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
+                            <li class="nav-item dropdown active">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Options</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class=" p-3 dropdown-item" data-bs-toggle="tab" href="#kt_tab_produit">Informations de la facture</a></li>
+                                    <li><a class=" p-3 dropdown-item" data-bs-toggle="tab" href="#kt_tab_entete">Elements d'entête</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active px-9 py-2" id="kt_tab_produit" role="tabpanel">
+                        <div class="table-responsive">
+                            <table class="table table-bordered gs-1 gy-2 gx-1">
+                                <thead class="bg-light-primary">
+                                    <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                                        <th class="min-w-125px max-w-200px">Désignation</th>
+                                        <th class="min-w-90px">Qté</th>
+                                        <th class="min-w-90px">Valeur</th>
+                                        <th class="min-w-90px">Montant Total</th>
+                                        <th class="min-w-50px"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="collection-form" data-index="{{ form.elementFactures|length > 0 ? form.elementFactures|last.vars.name + 1 : 0 }}"
+                                    data-prototype="{% autoescape 'html' %}{{ include('facture/partials/_prod_cond_com_clit.prototype.html.twig',
+                                    { 'form': form.elementFactures.vars.prototype, 'class':'Facture' })|escape }}{% endautoescape %}">
+                                    {% if form.elementFactures | length > 0 %}
+                                        {% for key, p in form.elementFactures %}
+                                            {% if key > 0 %}
+                                                {% set length = form.elementFactures|length %}
+                                                {{ include('facture/partials/_prod_cond_com_clit.prototype.html.twig',
+                                                    { 'form': p, 'length':length }) }}
+                                            {% else %}
+                                                {{ include('facture/partials/_prod_cond_com_clit.prototype.html.twig',
+                                                    { 'form': p }) }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        {{ form_row(form.elementFactures) }}
+                                    {% endif %}  
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <a href="javascript:;" class="btn btn-sm btn-light-primary add_vente_item_link" data-collection-holder-class="collection-form">
+                                <i class="la la-plus"></i>Ajouter une option
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+            
+        </div>
+        <div class="modal-footer">
+                <div class="d-flex justify-content-end">
+                    <!--begin::Button-->
+                    <button type="reset" data-kt-cond-type ="cancel" class="btn btn-light me-3">Vider</button>
+                    <!--end::Button-->
+                    <button type="submit" id="com_submit" data-kt-cond-type="submit" class="btn btn-primary me-3 imprimer">
+                        <span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer et Imprimer</span>
+                        <span class="indicator-progress">Veuillez patienter svp...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    <!--begin::Button-->
+                    <button type="submit" id="com_submit" data-kt-cond-type="submit" class="btn btn-primary">
+                        <span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer</span>
+                        <span class="indicator-progress">Veuillez patienter svp...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                        </span>
+                    </button>
+                    <!--end::Button-->
+                </div>
+            </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="kt_modal_scrollable_2">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un nouveau client</h5>
+
+                    <!--begin::Close-->
+                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                        <span class="svg-icon svg-icon-2x"></span>
+                    </div>
+                    <!--end::Close-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="annuler" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" id="ajouter" class="btn btn-primary" data-bs-dismiss="modal">Ajouter le client</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{{ form_end(form) }}
+        
