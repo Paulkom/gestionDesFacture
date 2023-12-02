@@ -187,9 +187,7 @@ function initializeContainer (collectionHolder = null){
             });
 
             i.addEventListener('keypress', inputPressEvent);
-            if(i.getAttribute('name') && !i.getAttribute('name').includes('livraison') &&
-                !i.getAttribute('name').includes('commande_client')  &&
-            !i.getAttribute('name').includes('facture')  &&
+            if(!i.getAttribute('name').includes('facture')  &&
                 !i.getAttribute('name').includes('paiement'))
             {
                 if(i.closest('div.form-child') != null)
@@ -561,13 +559,9 @@ function addFormDeleteLink (form, method = 'POST'){
                 delete form_children[form.getAttribute('id')];
                 delete form_children_controls[form.getAttribute('id')];
                 form.remove();
-                calculMontant('transfert', 'prixUnitaire', 'qteCondTrans');
-                calculMontant('sortie', 'prixUnitaire', 'qteCondSortie');
-                calculMontant('approvisionnement', 'prixAchat', 'qteCondAppro');
 
                 let formName = $(container).find('form').attr('name');
-                let arrayForm = ['produit','societe','approvisionnement','utilisateur','commande_frs',
-                'model_signataire','transfert','demande_de_prix'];
+                let arrayForm = ['utilisateur'];
                 if($.inArray(formName, arrayForm) !== -1){ unicRow(); } //control de select double
             });
         }
@@ -751,70 +745,6 @@ function checkboxEvent(e){
         }  
     }
 
-    if(e.target.getAttribute('name') == 'produit[estModeCarreau]')
-    {
-        e.target.parentNode.parentElement.classList.toggle("bg-light-primary");
-        let element = document.getElementById('infoCarreau');
-        element.classList.toggle("d-none");
-
-        let form = $(container).find('form');
-
-        if(e.target.checked){
-            $.each($(form.find('.carreau')), function (i, elt) {
-                $(elt).prop('required', 'required');
-                validation.addField($(elt).attr('name'),{
-                    validators: {
-                        notEmpty: {
-                            message: $(elt).prev().text()+' est obligatoire'
-                        }
-                    }
-                })
-                $(elt).parent().find('.form-label').addClass('required');
-            })
-        }else{
-            $.each($(form.find('.carreau')), function (i, elt) {
-                $(elt).prop('required', '');
-                $(elt).val("");
-                validation.removeField($(elt).attr('name'));
-                $(elt).removeClass('is-invalid');
-            })
-        }
-
-        
-        
-    }
-
-    if(e.target.getAttribute('name') == 'produit[estService]')
-    {
-        let form = $(container).find('form');
-        let element = document.getElementById('ignoreInEstService');
-        element.classList.toggle("d-none");
-
-        if(e.target.checked){
-            fields = $(form).find('input.ignoreInEstService, select.ignoreInEstService');
-            fields.each((o, el) => {
-                if($(el).prop('required')){
-                    validation.removeField($(el).attr('name'));
-                    $(el).removeClass('is-invalid');
-                    $(el).parent().find('.form-label').removeClass('required');
-                }
-            })
-            
-        }else{
-            fields = $(form).find('input.ignoreInEstServiceActif, select.ignoreInEstServiceActif');
-            fields.each((i, elt) => {
-                $(elt).prop('required', 'required');
-                validation.addField($(elt).attr('name'),{
-                    validators: {
-                        notEmpty: {
-                            message: $(elt).prev().text()+' est obligatoire'
-                        }
-                    }
-                })
-                $(elt).parent().find('.form-label').addClass('required');
-            })
-        }
-    }
 }
 
 function imprimable(){
@@ -822,11 +752,8 @@ function imprimable(){
     let date2 = jQuery("#date2").val();
     let client = jQuery("#client").val();
     let recherche = jQuery("#recherche").val();
-    let magasin = jQuery("#magasin").val();
     let statut = jQuery("#statut").val();
     let statuLiv = jQuery("#statutLiv").val();
-    let typeCommande = jQuery("#type_commande").val();
-    let produit = jQuery("#produit").val();
     var url = jQuery('#imp').attr("lien");
     var type = jQuery('#imp').attr("typep");
     var columns = $(jQuery(".table")[0]).attr("data-table-columns");
@@ -942,37 +869,12 @@ function getCurrentURL () {
     let url = window.location.href ;
     let uri = "";
 
-    if(url.includes('commande')){
-        uri = url+"/impression/docu";
-    }
-
-    if(url.includes('inventaire')){
-        uri = url+"fiche/inventaire/";
-    }
-
-    if(url.includes('livraison')){
-        uri = url+"imprime/livraison/doc";
-    }
-
-    if(url.includes('facture') && !(url.includes('factureproforma'))){
-        uri = url+"impression/docu/facture/facture";
+    if(url.includes('facture')){
+        uri = url+"impression/docu";
     }
 
     if(url.includes('paiement') ){
         uri = url+"doc/paiement/imprime";
-    }
-
-    if(url.includes('factureproforma')){
-        uri = url+"impression/docu/facture/pro/format";
-    }
-
-    if(url.includes('depot') && url.includes('transaction')){
-        uri = (url.split("depot"))[0] +"transaction/imprime";
-        console.log(uri);
-    }
-
-    if(url.includes('transaction') && !url.includes('depot')){
-        uri = url+"transaction/imprime";
     }
     return uri;
 }

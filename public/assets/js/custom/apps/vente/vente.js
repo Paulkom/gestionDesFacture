@@ -150,25 +150,6 @@ var gestionVente = function () {
             }
         });
     }
-    
-   /* var comptoire = () => {
-        let form = $(container).find('form');
-        let comptoire = form.find('.comptoire').parent();
-    
-        if(form.find('input[type=radio]:checked').val() == 'Physique'){
-            comptoire.hide();
-        }else{
-            comptoire.show();
-        }
-        form.find('select[name*="commande_client[typeCommande]"]').change(function() {
-            if (this.value == 'Au comptoir') {
-                comptoire.show();
-            }
-            else {
-                comptoire.hide();
-            }
-        });
-    }*/
 
     function vente() {
        
@@ -218,9 +199,9 @@ var gestionVente = function () {
                                 }
                             }
                             if($(this).hasClass("imprimer") == true){
-                                $("#commande_client_truc").val("OUI");
+                                $("#facture_truc").val("OUI");
                             }else{
-                                $("#commande_client_truc").val("NON"); 
+                                $("#facture_truc").val("NON"); 
                             }
                             if ($(container).find('select[name*="[acheteur]"]').val()=='' &&
                                 $(container).find('input[name*="[nom]"]').val()=='' &&
@@ -249,21 +230,21 @@ var gestionVente = function () {
             });*/
 
             document.querySelector('#annuler').addEventListener('click', function (e) {
-               $("#commande_client_nom").val('');
-               $("#commande_client_prenom").val('');
-               $("#commande_client_ifu").val('');
-               $("#commande_client_telephone1").val('');
-               $("#commande_client_telephone2").val('');
-               $("#commande_client_email").val('');
-               $("#commande_client_adresse").val('');
-               $("#commande_client_dateNais").val('');
-               $("#commande_client_denomination").val('');
-               $("#commande_client_raisonSociale").val('');
-               $("#commande_client_sigle").val('');
-               $("#commande_client_acheteur").prop("disabled", false);
-               if($("#commande_client_acheteur").hasClass("new")){
-                   $("#commande_client_acheteur option:selected").first().remove();
-                   $("#commande_client_acheteur").toggleClass("new");
+               $("#facture_nom").val('');
+               $("#facture_prenom").val('');
+               $("#facture_ifu").val('');
+               $("#facture_telephone1").val('');
+               $("#facture_telephone2").val('');
+               $("#facture_email").val('');
+               $("#facture_adresse").val('');
+               $("#facture_dateNais").val('');
+               $("#facture_denomination").val('');
+               $("#facture_raisonSociale").val('');
+               $("#facture_sigle").val('');
+               $("#facture_acheteur").prop("disabled", false);
+               if($("#facture_acheteur").hasClass("new")){
+                   $("#facture_acheteur option:selected").first().remove();
+                   $("#facture_acheteur").toggleClass("new");
                }
 
             });
@@ -271,16 +252,16 @@ var gestionVente = function () {
                 var statut  = $('input[name*="statut"]:checked').val();
                 var text    = null;
                 if( statut == 'Physique'){
-                    text = $("#commande_client_nom").val()+' '+$("#commande_client_prenom").val();
+                    text = $("#facture_nom").val()+' '+$("#facture_prenom").val();
                 }else{
-                    text = $("#commande_client_denomination").val();
+                    text = $("#facture_denomination").val();
                 }
-                $("#commande_client_acheteur").toggleClass("new");
+                $("#facture_acheteur").toggleClass("new");
                 
-                $("#commande_client_acheteur").prop("disabled", false);
-                $("#commande_client_acheteur").prepend("<option selected value=''>" + text +"</option>");
-                $("#commande_client_acheteur").select2();
-                $("#commande_client_acheteur").prop("disabled", true);
+                $("#facture_acheteur").prop("disabled", false);
+                $("#facture_acheteur").prepend("<option selected value=''>" + text +"</option>");
+                $("#facture_acheteur").select2();
+                $("#facture_acheteur").prop("disabled", true);
 
              });
 
@@ -296,7 +277,7 @@ var gestionVente = function () {
     //VERIFICATION DE CONNEXION INTERNET
     function checknet(form){
 
-        let input = form.find('input[name*="commande_client[checknet]"]');
+        let input = form.find('input[name*="facture[checknet]"]');
         var online = navigator.onLine;
         if (online) {
             console.log('yes online');
@@ -536,20 +517,20 @@ var gestionVente = function () {
                 });
             }
 
-            if(name.includes('commande_client[typeRemise]')){
+            if(name.includes('facture[typeRemise]')){
                 select.change(function() {
                     if (select.val() != '') {
-                        $(container).find('input[name*="commande_client[valeurRemise]"]').attr('readonly',false);
-                        $(container).find('input[name*="commande_client[valeurRemise]"]').removeClass('form-control-solid')
+                        $(container).find('input[name*="facture[valeurRemise]"]').attr('readonly',false);
+                        $(container).find('input[name*="facture[valeurRemise]"]').removeClass('form-control-solid')
                         remises();
                     }else{
-                        $(container).find('input[name*="commande_client[valeurRemise]"]').attr('readonly',true);
-                        $(container).find('input[name*="commande_client[valeurRemise]"]').addClass('form-control-solid')
+                        $(container).find('input[name*="facture[valeurRemise]"]').attr('readonly',true);
+                        $(container).find('input[name*="facture[valeurRemise]"]').addClass('form-control-solid')
                     }
                 });
             }
 
-            if(name.includes('commande_client[tauxAib]')){
+            if(name.includes('facture[tauxAib]')){
                 select.change(function () {
                     calculeDestotaux();
                 })
@@ -661,7 +642,7 @@ var gestionVente = function () {
                             $(container).find('input[name*="[reliquat]"]').val(0);
                         }  
                     }else{
-                        $(container).find('input[name*="commande_client[montantRecu]"]').val('');
+                        $(container).find('input[name*="facture[montantRecu]"]').val('');
                     }
                     
                 })
@@ -745,13 +726,13 @@ var gestionVente = function () {
                                 }
                         }
                     });
-                    // $(container).find('input[name*="commande_client[montantRecu]"]').val('')
-                    // $(container).find('input[name*="commande_client[reliquat]"]').val('')
+                    // $(container).find('input[name*="facture[montantRecu]"]').val('')
+                    // $(container).find('input[name*="facture[reliquat]"]').val('')
                 }
-                if(name.includes('commande_client[montantRecu]')){
+                if(name.includes('facture[montantRecu]')){
                     input.focusout(function () {
-                        var montantTtc= $(container).find('input[name*="commande_client[montantTtc]"]').val();
-                        var montantRecu = $(container).find('input[name*="commande_client[montantRecu]"]').val();
+                        var montantTtc= $(container).find('input[name*="facture[montantTtc]"]').val();
+                        var montantRecu = $(container).find('input[name*="facture[montantRecu]"]').val();
                         
                         if(parseFloat(montantTtc) > 0 && parseFloat(montantRecu) > 0) {
                             if(parseFloat(montantRecu) < parseFloat(montantTtc)) {
@@ -840,13 +821,13 @@ var gestionVente = function () {
         $(container).find('input[name*="[montantAib]"]').val(montantAib.toFixed(0));
         $(container).find('input[name*="[montantTS]"]').val(totalts.toFixed(0));
 
-        $(container).find('input[name*="commande_client[montantRecu]"]').val('')
-        $(container).find('input[name*="commande_client[reliquat]"]').val('')
+        $(container).find('input[name*="facture[montantRecu]"]').val('')
+        $(container).find('input[name*="facture[reliquat]"]').val('')
         
     }
 
     var remises =()=>{
-        let selettypeRemise = $(container).find('select[name*="commande_client[typeRemise]"]');
+        let selettypeRemise = $(container).find('select[name*="facture[typeRemise]"]');
         var value = $(selettypeRemise).find('option:selected').val();
         let remise = 0;
         var valeurRemise = parseFloat(parseFloat($(container).find('input[name*="[valeurRemise]"]').val()));
@@ -858,10 +839,10 @@ var gestionVente = function () {
                 }else if(value =='MT' && valeurRemise !='' && montantTotal != ''){
                     remise = valeurRemise;
                 } 
-                $(container).find('input[name*="commande_client[remise]"]').val(remise);
+                $(container).find('input[name*="facture[remise]"]').val(remise);
                 $(container).find('input[name*="[montantTtc]"]').val(montantTotal - remise); 
             }else{
-                $(container).find('input[name*="commande_client[remise]"]').val(0);
+                $(container).find('input[name*="facture[remise]"]').val(0);
                 $(container).find('input[name*="[montantTtc]"]').val(montantTotal); 
             }
         }  
