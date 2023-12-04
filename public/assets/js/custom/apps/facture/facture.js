@@ -20,6 +20,14 @@ var GESTIONFACTURE = function () {
             // console.log(data);
         }
     }
+    function datedate() {
+        var d = new Date(); var strDate =  (d.getFullYear())+ '-' + ('0'+(d.getMonth()+1)).slice(-2) + '-' +('0'+d.getDate()).slice(-2) ;
+        $("input[type='date']").each(function(){
+            if($(this).val() == ""){
+                $(this).val(strDate);
+            }
+        })
+    }
 
     
 
@@ -360,6 +368,7 @@ var GESTIONFACTURE = function () {
             loadnewForm();
             handlelistes();
             facture();
+            datedate();
             selectedoptions = [];
             eventchange();
         }
