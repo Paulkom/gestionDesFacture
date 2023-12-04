@@ -19,7 +19,7 @@ class ElementFactureType extends AbstractType
                 'label' => 'Désignation',
                 'required' => true,
                 'attr' => ['required'=>true, 
-                'class'=>'form-control mb-2', 
+                'class'=>'form-control mb-2 designation', 
                 'placeholder' => 'Initialisation du projet'],
             ])
             ->add('qte', NumberType::class, [
@@ -28,7 +28,7 @@ class ElementFactureType extends AbstractType
                 'required' => false,
                 'attr' => ['required'=>false, 
                 'readonly'=>false,
-                'class'=>'form-control form-control-sm decimal', 
+                'class'=>'form-control form-control-sm decimal qte', 
                 'placeholder' => '1'],
             ])
             ->add('mntTotal', NumberType::class, [
@@ -37,7 +37,7 @@ class ElementFactureType extends AbstractType
                 'required' => false,
                 'attr' => ['required'=>false, 
                 'readonly'=>false,
-                'class'=>'form-control form-control-sm decimal', 
+                'class'=>'form-control form-control-sm decimal mntTo', 
                 'placeholder' => '2000'],
             ])
             ->add('valeur', NumberType::class, [
@@ -46,7 +46,7 @@ class ElementFactureType extends AbstractType
                 'required' => false,
                 'attr' => ['required'=>false, 
                 'readonly'=>false,
-                'class'=>'form-control form-control-sm decimal', 
+                'class'=>'form-control form-control-sm decimal valeur', 
                 'placeholder' => '2000'],
             ])
         ;

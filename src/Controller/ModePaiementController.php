@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-#[Route('/mode/paiement')]
+#[Route('/admin/mode/paiement')]
 class ModePaiementController extends AbstractController
 {
     // /**

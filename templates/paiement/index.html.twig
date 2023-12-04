@@ -41,31 +41,4 @@
     {{ parent() }}
 
     <script src="{{ asset('assets/js/custom/apps/paiement/paiement.js') }}"></script>
-    <script>
-        /*$(document).ready(function () {
-            let seletcom = $(container).find('select[name*="paiement[facture]"]');
-            var selected = $(seletcom).find('option:selected').val();
-            if(seletcom){
-                seletcom.change(function () {
-                    selected = $(this).find('option:selected').val();
-                    var option = $(this).find('option:selected');
-                    var montantini  = option.data('montantini');
-                    var montantrest   = option.data('montantrest');
-                    if(montantrest == '0' || montantrest=='') montantrest = montantini;
-                    if(montantrest != '0'){
-                        $(container).find('input[name*="paiement[montantFacture]"]').val(montantrest);
-                        $(container).find('input[name*="paiement[montantPaye]"]').val(montantrest);
-                        $(container).find('input[name*="paiement[montantRAPayer]"]').val(0);
-                    } 
-                   /* if(selected){
-                        $(button).attr('disabled',false);
-                    }else{
-                        $(button).attr('disabled',true);
-                    }
-
-                });
-            }
-        })*/
-        
-    </script>
 {% endblock %}

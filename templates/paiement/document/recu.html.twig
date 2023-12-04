@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>RECU_Paiement</title>
+    <style>
+        .bod{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .bon {
+            border:1px solid;
+            border-top-color: white;
+            border-collapse:collapse;
+        }
+        .bod2{
+            /*border-style:solid;*/
+	        border-style:solid;
+            border-top-color: transparent;
+            border-collapse: collapse;
+        }
+        .bode{
+            border: none;
+            border-collapse: collapse;
+        }
+        .font{
+            font-size: 12px;
+        }
+        .pad{
+            padding: 6px 6px 6px 6px;
+        }
+        .fieldset{
+            border : 2px solid black ;
+            border-radius : 8px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="row">
+
+    <span style=" width:100%;  ">
+        <div>
+            
+
+            <div class="body-section">
+
+                {# entete #}
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr> 
+                            <td style="text-align: left;  width: 100%; padding: 3px 1px;"> 
+                            Entete
+                                {# <p><img alt="entete" style="width: 100%;" src="{{asset('uploads/medias/societe/' ~ societe.entete.id ~ "." ~ societe.entete.extension )}}"></p>  #}
+                            </td> 
+                        </tr> 
+                    </tbody>
+                </table> 
+                {# date #}
+                <div>
+                    <table style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+                        <tr style="margin-left: 10px;">  
+                            <td style="text-align: right;" > 
+                                {{ " Aujourd'hui le, " ~  ( paiement.datePaie | date("d-m-Y") )  }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                {# recu #}
+                <div style="width: 100%;background-color: #EBF5FF;padding: 10px 10px;">
+                    <b>REÇU DE PAIEMENT N° </b>  {{ paiement.refPai }} 
+                    {# {{ (paiement.banque) ? '[' ~ paiement.banque.denominationBanque ~ ']' }}
+                    {{ (paiement.numeroMobileMoney) ? paiement.numeroMobileMoney }} #}
+                </div>
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr><td colspan="4"></td></tr>
+                        <tr>
+                            <td style="text-align:left;" >
+                                <b>Client  : </b>
+                            </td>
+                            <td colspan="3" style="text-align:left;" >
+                                <div>
+                                    {{ paiement.facture.emetteur }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" >
+                                <p>--------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+                            </td>
+                        </tr>
+                        
+                        <tr><td colspan="4"></td></tr>
+                        <tr>
+                            <td style="text-align:left;" >
+                                <b>Motif  : </b>
+                            </td>
+                            <td colspan="3" style="text-align:left;font-size: 14px;">
+                                <div>
+                                    {% if paiement.restAPayer == "0.00" %} 
+                                        {{ "Règlement total de la facture N° " ~ paiement.facture.refFact }}
+                                        {% else %}
+                                        {{ "Règlement partiel de la facture N° " ~ paiement.facture.refFact }}
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr style="padding: 50px 20px !important;">
+                            <td style="text-align:left;" >
+                                <b>Mode de paiement  : </b>
+                            </td>
+                            <td style="text-align:left;">
+                                {{ paiement.modePaiement }}
+                            </td>
+                            <td style="text-align:left;" >
+                                <b>Montant du  : </b>
+                            </td>
+                            <td style="text-align:left;">
+                               {{ paiement.facture.montantFac | number_format(2, ',', ' ') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr style="padding: 50px 20px !important;">
+                            <td style="text-align:left;" >
+                                <b>Montant paye  : </b>
+                            </td>
+                            <td style="text-align:left;">
+                                {{ paiement.montantPaie | number_format(2, ',', ' ') }}
+                            </td>
+                            <td style="text-align:left;" >
+                                <b>Restant : </b>
+                            </td>
+                            <td style="text-align:left;">
+                               {{ paiement.restAPayer | number_format(2, ',', ' ') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <div class="font" style="margin-top: 5px;"> <strong>Arrêtée  le présent paiement de la somme de </strong> <em> {{" "~ valeur ~ " (" ~ paiement.montantPaie| number_format(0, ',', ' ') ~") francs CFA" }} <em> </div>
+                <div style="margin-left: 10px; margin-right: 10px;">
+                <hr align="center" style=" height:2px; color: black; margin: 20px 0px 10px 0px;border-width:2px; border: thick double #32a1ce;" >
+                </div>
+                {# *********// Signature //******** #}
+                <div class="body-section" >
+                    <table style="margin-left: 10px;  width:100%; margin-right: 10px;" >
+                        <thead>
+                        <tr>
+                        
+                        </tr>
+                        </tbody>
+                    </table>   
+                </div>
+
+                              <table style="width: 100%;">
+                    <tbody>
+                        <tr> 
+                            <td style="text-align: left;  width: 100%; padding: 3px 1px;"> 
+                            Entete
+                                {# <p><img alt="entete" style="width: 100%;" src="{{asset('uploads/medias/societe/' ~ societe.entete.id ~ "." ~ societe.entete.extension )}}"></p>  #}
+                            </td> 
+                        </tr> 
+                    </tbody>
+                </table> 
+                {# date #}
+                <div>
+                    <table style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+                        <tr style="margin-left: 10px;">  
+                            <td style="text-align: right;" > 
+                                {{ " Aujourd'hui le, " ~  ( paiement.datePaie | date("d-m-Y") ) }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                {# recu #}
+                <div style="width: 100%;background-color: #EBF5FF;padding: 10px 10px;">
+                    <b>REÇU DE PAIEMENT N° </b>  {{ paiement.refPai }} 
+                    {# {{ (paiement.banque) ? '[' ~ paiement.banque.denominationBanque ~ ']' }}
+                    {{ (paiement.numeroMobileMoney) ? paiement.numeroMobileMoney }} #}
+                </div>
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr><td colspan="4"></td></tr>
+                        <tr>
+                            <td style="text-align:left;" >
+                                <b>Client  : </b>
+                            </td>
+                            <td colspan="3" style="text-align:left;" >
+                                <div>
+                                    {{ paiement.facture.emetteur }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" >
+                                <p>--------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
+                            </td>
+                        </tr>
+                        
+                        <tr><td colspan="4"></td></tr>
+                        <tr>
+                            <td style="text-align:left;" >
+                                <b>Motif  : </b>
+                            </td>
+                            <td colspan="3" style="text-align:left;font-size: 14px;">
+                                <div>
+                                    {% if paiement.restAPayer== "0.00" %} 
+                                        {{ "Règlement total de la facture N° " ~ paiement.facture.refFact }}
+                                        {% else %}
+                                        {{ "Règlement partiel de la facture N° " ~ paiement.facture.refFact }}
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr style="padding: 50px 20px !important;">
+                            <td style="text-align:left;" >
+                                <b>Mode de paiement  : </b>
+                            </td>
+                            <td style="text-align:left;">
+                                {{ paiement.modePaiement }}
+                            </td>
+                            <td style="text-align:left;" >
+                                <b>Montant du  : </b>
+                            </td>
+                            <td style="text-align:left;">
+                               {{ paiement.facture.montantFac | number_format(2, ',', ' ') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                        <tr style="padding: 50px 20px !important;">
+                            <td style="text-align:left;" >
+                                <b>Montant paye  : </b>
+                            </td>
+                            <td style="text-align:left;">
+                                {{ paiement.montantPaie | number_format(2, ',', ' ') }}
+                            </td>
+                            <td style="text-align:left;" >
+                                <b>Restant : </b>
+                            </td>
+                            <td style="text-align:left;">
+                               {{ paiement.restAPayer | number_format(2, ',', ' ') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <div class="font" style="margin-top: 5px;"> <strong>Arrêtée  le présent paiement de la somme de </strong> <em> {{" "~ valeur ~ " (" ~ paiement.montantPaie| number_format(0, ',', ' ') ~") francs CFA" }} <em> </div>
+                <div style="margin-left: 10px; margin-right: 10px;">
+                <hr align="center" style=" height:2px; color: black; margin: 20px 0px 10px 0px;border-width:2px; border: thick double #32a1ce;" >
+                </div>
+                {# *********// Signature //******** #}
+                <div class="body-section" >
+                    <table style="margin-left: 10px;  width:100%; margin-right: 10px;" >
+                        <thead>
+                        <tr>
+                        
+                        </tr>
+                        </tbody>
+                    </table>   
+                </div>
+
+            </div>
+
+            
+            <br>
+          
+        </div>
+    </span>
+</div>
+</body>
+<html>

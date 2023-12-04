@@ -122,6 +122,17 @@ var GESTIONPAIEMENT = function() {
         }
         
     }
+
+    function datedate() {
+        var d = new Date(); var strDate =  (d.getFullYear())+ '-' + ('0'+(d.getMonth()+1)).slice(-2) + '-' +('0'+d.getDate()).slice(-2) ;
+        $("input[type='date']").each(function(){
+            if($(this).val() == ""){
+                $(this).val(strDate);
+            }
+        })
+    }
+    
+
     const paiement = () => {
         let parent = container;
         $(parent).find('[data-control="select2"]').select2();
@@ -149,51 +160,51 @@ var GESTIONPAIEMENT = function() {
             });
         }
 
-        
+        function calculResteAPayer(){
+            $("#paiement_montantPaie").keyup(function(){
+                let montFac = $("#paiement_montantFact").val();
+                let montantAPaie = $(this).val();
+                let reste = parseFloat(montFac) - parseFloat(montantAPaie);
+                if(reste < 0 ){
+                    toastr.error("Le montant à payer ne peut pas être supérieur au montant dû");
+                    reste = 0;
+                    $(this).val( parseFloat(montFac));
+                }
+                $("#paiement_restAPayer").val(reste);
+            });
+        }
+        calculResteAPayer();
         
         
 
-        let seletcom = $(container).find('select[name*="paiement[facture]"]');
+        let seletcom = $(container).find('select[id*="paiement_facture"]');
             var selected = $(seletcom).find('option:selected').val();
             if(seletcom){
-                seletcom.change(function () {
+                $(seletcom).change(function () {
+                    var selected1 = $(seletcom).find('option:selected');
                     selected = $(this).find('option:selected').val();
                     var option = $(this).find('option:selected');
-                    var montantini  = option.data('montantini');
-                    var montantrest   = option.data('montantrest');
-                    if(montantrest == '0' || montantrest=='') montantrest = montantini;
+                   // let leto = $(option).attr("data-montantIni");
+                    var montantini  = $(option).attr("data-montantIni");
+                    var montantrest   = $(option).attr("data-montantRest");
+                    // console.log(leto);
+                    if(montantrest == '0' || montantrest=='') 
+                        montantrest = montantini;
+
                     if(montantrest != '0'){
-                        $(container).find('input[name*="paiement[montantFacture]"]').val(montantrest);
+                        $(container).find('input[name*="paiement[montantFact]"]').val(montantrest);
                         $(container).find('input[name*="paiement[montantPaye]"]').val(montantrest);
                         $(container).find('input[name*="paiement[montantRAPayer]"]').val(0);
                     }
-                    //Deschanel
-                        $(container).find(".historiquePaiementsFacture").addClass("d-none");
-                        $(container).find(".historiquePaiementsFacture-title").html("");
-                        $(container).find(".historiquePaiementsFacture-content").html("");
-                        $(container).find(".historiquePaiementsFacture-name").html("");
-                        $.ajax({
-                            type: "GET",
-                            url: paiements_par_facture,
-                            data: {
-                                idFacture: selected
-                            },
-                            dataType: "json",
-                            success: function(data){
-                                if(data.html != ""){
-                                    $(container).find(".historiquePaiementsFacture").removeClass("d-none");
-                                    $(container).find(".historiquePaiementsFacture-title").html(data.reference);
-                                    $(container).find(".historiquePaiementsFacture-name").html(data.name);
-                                    $(container).find(".historiquePaiementsFacture-content").html(data.html);
-                                }
-                            }
-                        });
-                    //Fin deschanel
+                    $(container).find(".historiquePaiementsFacture").addClass("d-none");
+                    $(container).find(".historiquePaiementsFacture-title").html("");
+                    $(container).find(".historiquePaiementsFacture-content").html("");
+                    $(container).find(".historiquePaiementsFacture-name").html("");
                 });
 
                 if(selected) {
                     var option = $(seletcom).find('option:selected');
-                    var montantrest  = option.data('montantrest');
+                    var montantrest  = option.data('montantRest');
                     $(container).find('input[name*="paiement[montantFacture]"]').val(montantrest);
                 }
             }
@@ -235,52 +246,6 @@ var GESTIONPAIEMENT = function() {
              var name = $(this).attr("name");
             if (typeof name != "undefined") {
                 var input = $(elt);
-                 input.keyup(function () {
-                    var montantPaye= parseFloat($(container).find('input[name*="[montantPaye]"]').val());
-                    var montantFacture= parseFloat($(container).find('input[name*="[montantFacture]"]').val());
-                    console.log('qtite',montantPaye,montantFacture,name);
-                    if (name.includes('[montantPaye]')) {
-                        $(container).find('input[name*="paiement[montantRecu]"]').val('');
-                        $(container).find('input[name*="[reliquat]"]').val('');  
-                        if(parseFloat(montantPaye) > 0 && parseFloat(montantPaye) <=  parseFloat(montantFacture)){
-                            $(container).find('input[name*="[montantRAPayer]"]').val((parseFloat(montantFacture)- parseFloat(montantPaye)));
-                        }else{
-                            $(container).find('input[name*="[montantPaye]"]').val('');
-                            $(container).find('input[name*="[montantRAPayer]"]').val(montantFacture);
-                        }
-                    }
-                    
-                    if (name.includes('[montantRecu]')) {
-                        var montantPaye = $(container).find('input[name*="[montantPaye]"]').val();
-                        if (montantPaye) {
-                            if(parseFloat($(container).find('input[name*="[montantRecu]"]').val()) >= parseFloat(montantPaye)) {
-                                $(container).find('input[name*="[reliquat]"]').val(parseFloat($(container).find('input[name*="[montantRecu]"]').val()-montantPaye));
-                            }else{
-                                $(container).find('input[name*="[reliquat]"]').val(0);  
-                            }  
-                        }
-                    }
-                })
-
-                input.focusout(function () {
-                    if (name.includes('[montantRecu]')) {
-                        var montantPaye= $(container).find('input[name*="paiement[montantPaye]"]').val();
-                        var montantRecu = $(container).find('input[name*="paiement[montantRecu]"]').val()
-                        if (montantRecu) {
-                            if(parseFloat(montantPaye) > 0 && parseFloat(montantRecu) > 0) {
-                                if(parseFloat(montantRecu) < parseFloat(montantPaye)) {
-                                    var message = "Le montant reçu ("+ montantRecu +") doit être supérieur ou égal au montant TTC ("+montantPaye+")";
-                                    toastr.error(message);
-                                    $(container).find('button[type="submit"]').attr('disabled',true)
-                                }else{
-                                    $(container).find('button[type="submit"]').attr('disabled',false)
-                                }
-                            }
-                        } else {
-                            $(container).find('button[type="submit"]').attr('disabled',false)
-                        }
-                    }
-                });
             }
         });
     }
@@ -289,6 +254,7 @@ var GESTIONPAIEMENT = function() {
         init: function() {
             loadnewForm();
             paiement();
+            datedate();
             swishModePaiement('');
         }
     }

@@ -21,13 +21,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 #[Route('/admin/facture')]
 class FactureController extends AbstractController
 {
 
     #[Route('/', name: 'app_Facture_index', methods: ['GET', 'POST'])]
-    public function index(Request $request,EntityManagerInterface $entityManager, CommentaireRepository $commentaireRepository, SocieteRepository $societeRepository, FactureRepository $factureRepository): Response
+    public function index(Request $request,MailerInterface $mailer,EntityManagerInterface $entityManager, CommentaireRepository $commentaireRepository, SocieteRepository $societeRepository, FactureRepository $factureRepository): Response
     {
         $facture = new Facture();
         
@@ -43,6 +45,20 @@ class FactureController extends AbstractController
             $commentaire->setObjet("Nouvelle Facture émise");
             $commentaire->setMessage("Veuillez recevoir, Mme/Mr la personne chargée de l'étude des factures, la facture suivante pour évaluation. Merci");
             $commentaireRepository->add($commentaire);
+
+// Envoie de mail
+            $email = (new Email())
+            ->from('paulk379@gmail.com')
+            ->to('paulkombieni12@gmail.com')
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Edition d\'une nouvelle facture n° '.$facture->getRefFact())
+            ->text('Sending emails is fun again!')
+            ->html('<p>See Twig integration for better HTML integration!</p>');
+            $mailer->send($email);
+/// Fin de l'envoie du mail
             if($facture->getId() != null){
                 $id = $facture->getId();
                 $statu = $form->get("truc")->getData();
