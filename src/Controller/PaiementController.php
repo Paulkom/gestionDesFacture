@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/paiement')]
 class PaiementController extends AbstractController
 {
-    #[Route('/', name: 'app_paiement_index', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'paiement_index', methods: ['GET', 'POST'])]
     public function index(Request $request,PaiementRepository $paiementRepository): Response
     {
         $paiement = new Paiement();
@@ -33,12 +33,11 @@ class PaiementController extends AbstractController
             {
                 $paiement->getFacture()->setMontantRest($paiement->getRestAPayer());
                 if((float)$paiement->getRestAPayer() != 0.00){
-                    //$paiement->getCommande()->setStatut("Partielle");
                     $paiement->getFacture()->setStatut("Partielle");
                 }else{
-                    //$paiement->getCommande()->setStatut("Payée");
                     $paiement->getFacture()->setStatut("Payée");
                 }
+                $paiement->getFacture()->setMontantRest($paiement->getRestAPayer());
                 $paiementRepository->add($paiement); 
                 if($paiement->getId() != null){
                     $paiement2 = new Paiement();

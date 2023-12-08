@@ -17,6 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use Timestampable;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

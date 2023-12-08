@@ -51,6 +51,9 @@ class Facture
     #[ORM\Column(length: 255)]
     private ?string $emetteur = null;
 
+    #[ORM\Column]
+    private ?int $acteur = null;
+
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
@@ -255,5 +258,17 @@ class Facture
     public function __toString()
     {
        return $this->refFact. " [ ".$this->emetteur."]";
+    }
+
+    public function getActeur(): ?int
+    {
+        return $this->acteur;
+    }
+
+    public function setActeur(int $acteur): static
+    {
+        $this->acteur = $acteur;
+
+        return $this;
     }
 }

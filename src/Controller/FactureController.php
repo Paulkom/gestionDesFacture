@@ -28,7 +28,7 @@ use Symfony\Component\Mime\Email;
 class FactureController extends AbstractController
 {
 
-    #[Route('/', name: 'app_Facture_index', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'facture_index', methods: ['GET', 'POST'])]
     public function index(Request $request,MailerInterface $mailer,EntityManagerInterface $entityManager, CommentaireRepository $commentaireRepository, SocieteRepository $societeRepository, FactureRepository $factureRepository): Response
     {
         $facture = new Facture();
@@ -38,6 +38,7 @@ class FactureController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             
             $facture->setEstSup(0);
+            $facture->setActeur(($this->getUser())->getId());
             // $facture->setStatut("Facture");
             $factureRepository->add($facture);
             $commentaire = new Commentaire();

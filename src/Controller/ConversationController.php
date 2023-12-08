@@ -12,8 +12,11 @@ class ConversationController extends AbstractController
     #[Route('/', name: 'conversation')]
     public function index(FactureRepository $factureRepository): Response
     {
+        $user = $this->getUser();
+        $factures = $factureRepository->factureConversation($user);
+        //dd($factures);
         return $this->render('conversation/index.html.twig', [
-            'controller_name' => 'ConversationController',
+            "factures"=>$factures,
         ]);
     }
 }

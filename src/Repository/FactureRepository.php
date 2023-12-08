@@ -21,6 +21,8 @@ class FactureRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Facture::class);
     }
+
+
     
     public function add(Facture $entity, bool $flush = true): void
     {
@@ -36,6 +38,28 @@ class FactureRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function factureConversation($user){
+        $query =  $this->createQueryBuilder('f')
+            ->andWhere('f.estSup = :sup')
+            ->setParameter("sup",0);
+            //dd($user->isEstAdmin());
+
+            if($user->isEstAdmin())
+            {
+                $query->andWhere('f.acteur = :val')
+                ->setParameter('val', $user->getId());
+            }
+            $query->andWhere('f.estValide = :val2 ')
+                ->setParameter('val2', 0);
+            $query->andWhere('f.montantRest != :val3 ')
+                ->setParameter('val3', 0);
+            $query->orderBy('f.id', 'DESC');
+            ;
+
+       return $query->getQuery()->getArrayResult();
+        
     }
 
     public function factureEnAttenteDeValidation(){

@@ -99,8 +99,8 @@ Class Parameters {
                 'submenus'   => [
                     [
                         'title'      => 'Devis',
-                        'route'      => '',
-                        'roles'      =>'',
+                        'route'      => 'facture_index',
+                        'roles'      =>'ROLE_FACTURE',
                     ],
                 ],
             ],
@@ -119,9 +119,9 @@ Class Parameters {
                 'roles'      =>'ROLE_CONFIGURATION',
                 'submenus'   => [
                     [
-                        'title'      => 'Suivi',
-                        'route'      => '',
-                        'roles'      =>'',
+                        'title'      => 'Paiement',
+                        'route'      => 'paiement_index',
+                        'roles'      =>'ROLE_PAIEMENT',
                     ],
                 ],
             ],
