@@ -58,38 +58,23 @@
                             class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
                             <div class="menu-item">
                                 <a class="menu-link py-3 kt-menu-proto active" href="javascript:void(0)" id="kt_Collaborateur_form" onclick="activateMenu(this);"
-                                    data-content="{% autoescape 'html' %}{{ include('utilisateur/partials/_card_form.html.twig', {'idMenu':'kt_Collaborateur_list'})|escape }}{% endautoescape %}">
+                                    data-content="{% autoescape 'html' %}{{ include('utilisateur/partials/_card_form.html.twig', {'idMenu':'kt_utilisateur_list'})|escape }}{% endautoescape %}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">Ajouter un Collaborateur</span>
                                 </a>
                             </div>
-                            <div class="menu-item">
-                                <a class="menu-link py-3 kt-menu-proto" href="javascript:void(0)" id="kt_Collaborateur_list" onclick="activateMenu(this);"
-                                    data-content="{% autoescape 'html' %}{{ include('utilisateur/partials/_card_list.html.twig', {'idMenu':'kt_Collaborateur_list'})|escape }}{% endautoescape %}">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Liste des Collaborateurs</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link py-3 kt-menu-proto d-none remove" href="javascript:void(0)">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Création de compte</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link py-3 kt-menu-proto d-none remove" data-content="" id="kt_Collaborateur_show" href="javascript:void(0)" onclick="activateMenu(this);" >
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Détails</span>
-                                </a>
-                            </div>
+                            
+                           <div class="menu-item">
+                                    <a class="menu-link py-3 kt-menu-proto" href="javascript:void(0)" id="kt_utilisateur_list" onclick="activateMenu(this);"
+                                        data-content="{% autoescape 'html' %}{{ include('utilisateur/partials/_card_list.html.twig', {'idMenu':'kt_utilisateur_list'})|escape }}{% endautoescape %}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">Liste des Collaborateurs</span>
+                                    </a>
+                                </div>
                         </div>
                     </div>
                 </div>

@@ -67,11 +67,11 @@ class Societe
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $apiLink = null;
 
-    private ?\DateTimeInterface $createdAt = null;
+    // private ?\DateTimeInterface $createdAt = null;
 
-    private ?\DateTimeInterface $updatedAt = null;
+    // private ?\DateTimeInterface $updatedAt = null;
 
-    private ?\DateTimeInterface $deletedAt = null;
+    // private ?\DateTimeInterface $deletedAt = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Media $logo = null;

@@ -55,6 +55,19 @@ class PaiementRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
    }
 
+      public function paiementsFacture($fact): array
+        {
+            return $this->createQueryBuilder('p')
+                ->leftJoin("p.facture","f")
+                ->andWhere('p.esSup = 0')
+                ->andWhere('f = :facture')
+                ->setParameter('facture', $fact)
+                ->orderBy('p.id', 'ASC')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+
 
 //    /**
 //     * @return Paiement[] Returns an array of Paiement objects

@@ -19,4 +19,15 @@ class ConversationController extends AbstractController
             "factures"=>$factures,
         ]);
     }
+
+    #[Route('/show/{id}', name: 'conversation', methods:["GET","POST"])]
+    public function show(FactureRepository $factureRepository): Response
+    {
+        $user = $this->getUser();
+        $factures = $factureRepository->factureConversation($user);
+        //dd($factures);
+        return $this->render('conversation/index.html.twig', [
+            "factures"=>$factures,
+        ]);
+    }
 }

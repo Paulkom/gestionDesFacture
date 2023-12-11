@@ -23,6 +23,9 @@ class ModePaiement
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $estSup = null;
+
     #[ORM\OneToMany(mappedBy: 'modePaiement', targetEntity: Paiement::class, orphanRemoval: true)]
     private Collection $paiements;
 
@@ -93,5 +96,17 @@ class ModePaiement
     public function __toString()
     {
         return $this->code . " [ ".$this->libelle. " ]"; 
+    }
+
+    public function isEstSup(): ?bool
+    {
+        return $this->estSup;
+    }
+
+    public function setEstSup(?bool $estSup): static
+    {
+        $this->estSup = $estSup;
+
+        return $this;
     }
 }

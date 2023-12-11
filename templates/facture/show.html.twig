@@ -1,9 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block title %}Détail sur la facture : {{ entitie.refFact }}{% endblock %}
+
+{% block body %}
 <div class="card card-flush">
     <!--begin::Card header-->
     <div class="card-header pt-7">
         <!--begin::Card title-->
         <div class="card-title">
-            <h2>Détails de la facture {{ entitie.refCom }}</h2>
+            <h2>Détails de la facture {{ entitie.refFact }}</h2>
         </div>
     </div>
     <div class="card-body pt-5">
@@ -12,70 +16,89 @@
                 <table class="table align-middle table-row-dashed fs-6 gy-5 ">
                     <tr>
                         <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Date Com.:</th>
-                        <td>{{ entitie.dateCom ? entitie.dateCom|date('d-m-Y à H:i:s') : '' }}</td>
+                        <td>{{ entitie.dateFac ? entitie.dateFac|date('d-m-Y à H:i:s') : '' }}</td>
                         <th class="text-gray-500 fw-bolder fs-7 text-uppercase" >Reference:</th>
-                        <td class="fw-bolde">{{ entitie.refCom }}</td>
+                        <td class="fw-bolde">{{ entitie.refFact }}</td>
                     </tr>
                     <tr>
-                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Client.:</th>
-                        <td colspan="3">{{ entitie.acheteur.nomClient }}</td>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Emetteur.:</th>
+                        <td colspan="3">{{ entitie.emetteur }}</td>
                     </tr>
                     <tr>
-                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant HT:</th>
-                        <td>{{ entitie.montantHt | number_format(2, ',', ' ')}} F CFA</td>
-                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant HT après remise:</th>
-                        <td class="fw-bolde">{{ entitie.montantHtToAprRse | number_format(2, ',', ' ')}} F CFA</td>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant Facture:</th>
+                        <td>{{ entitie.montantFac | number_format(2, ',', ' ')}} F CFA</td>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant Payé:</th>
+                        <td class="fw-bolde">{{ (entitie.montantFac - entitie.montantRest) | number_format(2, ',', ' ')}} F CFA</td>
                     </tr>
                     <tr>
-                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase" >Montant TVA:</th>
-                        <td>{{ entitie.montantTva | number_format(2, ',', ' ')}} F CFA</td>
-                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant TTC:</th>
-                        <td class="fw-bolde">{{ entitie.montantTtc| number_format(2, ',', ' ') }} F CFA</td>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase" >Montant restant:</th>
+                        <td>{{ entitie.montantRest | number_format(2, ',', ' ')}} F CFA</td>
+                        {# <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Montant TTC:</th>
+                        <td class="fw-bolde">{{ entitie.montantTtc| number_format(2, ',', ' ') }} F CFA</td> #}
                     </tr>
                      <tr>
                         <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Statut:</th>
                         <td class="fw-bolde">
-                           {% if entitie.statut == "En attente" %}<div class='badge badge-light-primary fw-bold'>{{ entitie.statut }}</div>{% endif %}
-                           {% if entitie.statut == "Livrer" %}<div class='badge badge-success fw-bold'>{{ entitie.statut }}</div>{% endif %}
-                           {% if entitie.statut == "payer" %}<div class='badge badge-light-success fw-bold'>{{ entitie.statut }}</div>{% endif %}
-                           {% if entitie.statut == "Annuler" %}<div class='badge badge-light-danger fw-bold'>{{ entitie.statut }}</div>{% endif %}
+                           {% if entitie.statut == "En cours" %}<div class='badge badge-light-primary fw-bold'>{{ entitie.statut }}</div>{% endif %}
+                           {% if entitie.statut == "Payer" %}<div class='badge badge-light-success fw-bold'>{{ entitie.statut }}</div>{% endif %}
+                           {% if entitie.statut == "Supprimer" %}<div class='badge badge-light-danger fw-bold'>{{ entitie.statut }}</div>{% endif %}
                         </td>
                         <th></th>
                         <td></td>
                     </tr>
                 </table>
             </div>
-            <h4 class="mt-10"> Liste des produits commandés. <span class="text-danger">(Les prix et les montants sont en Francs CFA)</span></h4>
+            <h4 class="mt-10"> Contenu de la facture. <span class="text-danger">(Les prix et les montants sont en Francs CFA)</span></h4>
             <div class="table-responsive">
                 <table class="table align-middle table-row-dashed fs-6 gy-5 ">
                     <thead> 
                         <tr class="text-gray-500 fw-bolder fs-7 text-uppercase">
                             <th class="min-w-200px ">Designation</th>
-                            <th class="min-w-80px">Qte</th>
-                            <th class="min-w-100px">Prix Uni</th> 
-                            <th class="min-w-100px">Prix Uni HT</th> 
-                            <th class="min-w-90px">REM.</th>
-                            <th class="min-w-125px">MT.HT</th> 
-                            <th class="min-w-125px">MT. HT apr. Rem.</th> 
-                            <th class="min-w-90px">MT. TVA</th> 
-                            <th class="min-w-125px">MT. TTC</th> 
+                            <th class="min-w-80px">Quantité</th>
+                            <th class="min-w-100px">Valeur</th> 
+                            <th class="min-w-125px">Montant Total</th> 
                         </tr> 
                     </thead> 
-                    {% for c in entitie.produitCondComClits  %}
+                    {% for c in entitie.elementFactures  %}
                         <tr> 
-                            <td>{{ c.produit }}</td>
-                            <td>{{c.qtite | number_format(2, ',', ' ')}}</td>
-                            <td>{{c.prix | number_format(2, ',', ' ')}}</td>
-                            <td>{{c.prixHt | number_format(2, ',', ' ')}}</td>
-                            <td>{{c.remise == null ? (0 | number_format(2, ',', ' ')) : c.remise| number_format(2, ',', ' ') }}</td>
-                            <td>{{c.montant | number_format(2, ',', ' ')}}</td>
-                            <td>{{c.montantHtAprRse | number_format(2, ',', ' ')}}</td>
-                            <td>{{c.montantTvap | number_format(2, ',', ' ')}}</td>
-                            <td>{{c.montantTtcp | number_format(2, ',', ' ')}}</td>
+                            <td>{{ c.designation }}</td>
+                            <td>{{c.qte | number_format(2, ',', ' ')}}</td>
+                             <td>{{c.valeur | number_format(2, ',', ' ')}}</td>
+                            <td>{{c.mntTotal | number_format(2, ',', ' ')}}</td>
                         </tr>
                     {% endfor %}    
                 </table>
             </div>
+        {% if form is defined and app.user.estAdmin == true %}
+             <h4 class="mt-10"> Commentaire <span class="text-danger">Faites un commentaire</span></h4>
+                <div class="table-responsive">
+                    {{ form_start(form) }}
+                        <div class="row g-2" style=" width:100%;">
+                            <div class="mb-3 fv-row fv-plugins-icon-container col">
+                                {{ form_label(form.message) }}
+                                {{ form_widget(form.message) }}
+                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="mb-5 fv-row fv-plugins-icon-container">
+                                <!--begin::Button-->
+                                <button type="reset" data-kt-cond-type="cancel" class="btn btn-light me-3">Vider</button>
+                                <!--end::Button-->
+                                <!--begin::Button-->
+                                <button type="submit" id="condi_submit" data-kt-cond-type="submit" class="btn btn-primary">
+                                    <span class="indicator-label"> <i class="fa fa-plus"></i> Envoyer </span>
+                                    <span class="indicator-progress">Veuillez patienter svp...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </button>
+                            <!--end::Button-->
+                        </div>
+
+                    {{ form_end(form) }}
+                
+                </div>
+        {% endif %}
         </div>
     </div>
 </div>
+{% endblock %}

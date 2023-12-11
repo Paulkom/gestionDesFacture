@@ -18,14 +18,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FactureType extends AbstractType
 {
-    private $produitrepository;
-    private $em;
-    private $user ;
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->em = $entityManager;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -36,12 +28,12 @@ class FactureType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
                 'label_attr' => ['class' => 'form-label'],
-                'label' => 'Date commande',
+                'label' => 'Date Facture',
                 'required' => true,
                 'attr' => ['required'=>true,
                 // 'readonly'=>true,
                 'class'=>'form-control mb-2 form-control-solid', 
-                'placeholder' => 'Date de la commande'],
+                'placeholder' => 'Date de la Facture'],
             ])
             ->add('montantFac', NumberType::class, [
                 'label_attr' => ['class' => 'form-label'],

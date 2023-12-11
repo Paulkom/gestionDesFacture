@@ -38,7 +38,7 @@
             if (typeof this.request != 'undefined') {
                 this.request.abort();
             }
-
+console.log(AjaxifySearch);
             this.request = $.ajax({
                 url: AjaxifySearch.URL.count,
                 type: 'GET',

@@ -1,7 +1,7 @@
 var container = document.querySelector('[data-call-form="ajax"]');
 var element;
 var form_children = [];
-var name_forme = ['livraison','commande_client','facture','depot','paiement'];;
+var name_forme = ['facture','depot','paiement'];;
 var form_children_controls = [];
 var currentForm;
 var newform = container != null && container.dataset !== "undefined" ?  container.dataset.content : null;
@@ -138,9 +138,11 @@ function initializeContainer (collectionHolder = null){
         tableau = parent.querySelector('.kt_entity_table');
         etattable = parent.querySelector('.kt_etat_table');
         element = parent.querySelector('#kt_stepper_basic');
+        console.log("Bonjour");
         //initialiser les collections
         parent.querySelectorAll('.add_item_link').forEach(btn => {
             btn.addEventListener("click", addFormToCollection);
+            
             const holders = container.querySelectorAll('.' + btn.dataset.collectionHolderClass);
             holders.forEach(h => {
                 const divs = h.querySelectorAll('div.form-child');
@@ -187,13 +189,13 @@ function initializeContainer (collectionHolder = null){
             });
 
             i.addEventListener('keypress', inputPressEvent);
-            if(!i.getAttribute('name').includes('facture')  &&
+            if(i.getAttribute('name') && !i.getAttribute('name').includes('facture')  &&
                 !i.getAttribute('name').includes('paiement'))
             {
                 if(i.closest('div.form-child') != null)
                 {
                     let bool = true;
-                    if(i.hasAttribute('required') && i.getAttribute('required') === 'required')
+                    if(i.getAttribute('name') && i.hasAttribute('required') && i.getAttribute('required') === 'required')
                         bool = i.value !== "";
                     const prefix = i.closest('div.form-child').getAttribute('id');
                     form_children[prefix][i.getAttribute('name')] = i.value;
@@ -617,8 +619,7 @@ function addFormToCollection(e){
         // $('button[type="submit"]').prop('disabled',false);
 
         let formName = $(container).find('form').attr('name');
-        let arrayForm = ['produit','societe','approvisionnement','utilisateur','personnel','commande_frs',
-        'model_signataire','transfert','demande_de_prix'];
+        let arrayForm = ['societe','utilisateur'];
         if($.inArray(formName, arrayForm) !== -1){ unicRow(); } //control de select double
         
         form_children[prefix] = [];
@@ -758,7 +759,7 @@ function imprimable(){
     var type = jQuery('#imp').attr("typep");
     var columns = $(jQuery(".table")[0]).attr("data-table-columns");
     var donnees = $("#kt_accordion_1").attr("data-donnee");
-    url = url + "?date1="+date1+"&date2="+date2+"&recherche="+recherche+"&client="+client+"&type="+type+"&coulums="+columns+"&magasin="+magasin+"&produit="+produit+"&statut="+statut+"&statutLiv="+statuLiv+"&typeCommande="+typeCommande+"&donnees="+donnees;
+    url = url + "?date1="+date1+"&date2="+date2+"&recherche="+recherche+"&client="+client+"&type="+type+"&coulums="+columns+"&statut="+statut+"&donnees="+donnees;
     window.open(url, '_blank');
 }
 

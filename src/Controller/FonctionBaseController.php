@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Database\NativeQueryMySQL;
 use App\Entity\Utilisateur;
+use App\Repository\MenuRepository;
 use App\Services\LibrairieService;
+use App\Services\Parameters;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,16 +29,20 @@ class FonctionBaseController extends AbstractController
     protected $passwordHasher;
     private $security;
     private $session;
+    private $parameters;
+
 
     
-    public function __construct(Security $security, EntityManagerInterface $entityM,UserPasswordHasherInterface $passwordHasher,CsrfTokenManagerInterface $tokenManager,)
+    public function __construct(Security $security, Parameters $parameters, EntityManagerInterface $entityM,UserPasswordHasherInterface $passwordHasher,CsrfTokenManagerInterface $tokenManager,)
     {
         $this->security = $security;
         $this->tokenManager = $tokenManager;
         $this->session = []; //$sessionInterface;
+        $this->parameters = $parameters;
         $this->passwordHasher =$passwordHasher;
         $this->em = $entityM;
     }
+
 
     #[Route('/auteurSortie/load/options-json', name: 'app_auteurSortie_select')]
     public function loadAuteurSortie(Request $request)
@@ -129,11 +135,7 @@ class FonctionBaseController extends AbstractController
     #[Route('/admin/{class}-data-load/ajax', name: 'app_load_data_ajax', methods:["GET","POST"])]
     public function ajaxLoad(Request $request, Environment $env, NativeQueryMySQL $native, LibrairieService $lib, $class): Response
     {
-        
-        // $societe = $request->getSession()->get("societe");
-        // $utilisateur = $request->getSession()->get("user");
-        
-        // $societeId = $societe->getId();
+        $user = $this->getUser();
         $parameters = $request->getMethod() == 'GET' ? $request->query->all() : $request->request->all();
         $result = null;
         if (isset($parameters['id']) && !empty($parameters['id'])) {
@@ -155,23 +157,16 @@ class FonctionBaseController extends AbstractController
             $search = (isset($parameters['search']['value'])
                 && $parameters['search']['value']) ? $parameters['search']['value'] : '';
                 $where ="";
-                // if($request->getSession()->get("user")->isEstSuper()){
-                //     $where = "\nWHERE (o.deletedAt is null OR o.estSup != 1)";
+                if($user->isEstAdmin()){
+                    $where = "\nWHERE (o.deletedAt is null OR o.estSup != 1)";
                    
-                // }else{
-
-                //     if ($class != "societe" ) {
-                //         if($class == "profil"){
-                //             $where = "\nWHERE (o.deletedAt is null OR o.estSup != 1) ";
-                //         }else{
-                //             $where = "\nWHERE (o.deletedAt is null OR o.estSup != 1) and o.societe = $societeId";
-                //         }
-                       
-                //     }else{
-                //         $where = "\nWHERE (o.deletedAt is null OR o.estSup != 1) and o.id = $societeId";
-                //     }
-                // }
-            
+                }else{
+                        if($class == "facture" || $class == "paiement"){
+                            $where = "\nWHERE (o.deletedAt is null OR o.estSup != 1) ";
+                        }else{
+                            $where = "\nWHERE (o.deletedAt is null OR o.estSup != 1) and o.agent = ".$user->getId();
+                        }
+                }
            
             //$where .= "AND ";
             $where .=" AND ( ";
@@ -268,7 +263,6 @@ class FonctionBaseController extends AbstractController
             }
                 
             //Reconstruire la requête avec les jointures
-            //dump($where);
             $sql .= $join_sql;
             $count_sql .= $join_sql;
             $sql = str_replace(":columns", $list_columns_result, $sql) . $where . "\nORDER BY $default_alias.id DESC";
@@ -300,7 +294,10 @@ class FonctionBaseController extends AbstractController
         Environment        $env,
         LibrairieService   $lib,
         ValidatorInterface $validator,
-                           $class, $action="call", $key=null, $param=null): Response
+                           $class, $action="call", 
+                           $key=null, 
+                           $param=null
+                           ): Response
     {
         
         try {
@@ -310,12 +307,10 @@ class FonctionBaseController extends AbstractController
             $form = null;
             //echo $class;
             // echo ucfirst($class);
-            //dump(ucfirst($class),$class);
             $classname = 'App\\Entity\\' . ucfirst($class);
             $classtype = 'App\\Form\\' . ucfirst($class . 'Type');
             $repository = $this->em->getRepository(get_class(new $classname()));
             $view = '';
-            //dump("Bonjour");
             if(!empty($key)) {
                 $entity = $repository->find($key);
                 $message = "Modification effectuée avec succès.";
@@ -329,7 +324,6 @@ class FonctionBaseController extends AbstractController
                 if ($constructor && $constructor->getParameters()) {
                     //$params = $constructor->getParameters();
                     if (
-                        // (new $classname() instanceof Commandes) ||
                         (new $classname() instanceof Utilisateur)
                     )
                         $formtype = $reflector->newInstanceArgs([$this->em, []]);
@@ -353,19 +347,22 @@ class FonctionBaseController extends AbstractController
                 }
             }
             $results = ['entity' => $entity];
+            if($action === "show"){
+                $entities = $repository->find($key);
+                //if ($env->getLoader()->exists($lib->camel2dashed($class) . '/show.html.twig')) {
+                    $view = $lib->camel2dashed($class) . '/show.html.twig';
+                    $html = $this->render($view, [
+                        'entitie' => $entities,
+                    ]);
+                //}
+                $results['html'] = $html;
+            }
             switch ($action) {
                 case 'call':
                     break;
-                case 'show':
-                    $entities = $repository->find($key);
-                    if ($env->getLoader()->exists($lib->camel2dashed($class) . '/show.html.twig')) {
-                        $view = $lib->camel2dashed($class) . '/show.html.twig';
-                        $html = $this->renderView($view, [
-                            'entitie' => $entities,
-                        ]);
-                    }
-                    $results['html'] = $html;
-                    break;
+                // case "show":
+                    
+                //     break;
                 case 'edit':
                     if (!empty($view)) {
                         $form_new = $this->createForm(get_class($formtype), (new $classname()), [
@@ -444,10 +441,6 @@ class FonctionBaseController extends AbstractController
             $results['html'] = $html;
         } else {
             if ($env->getLoader()->exists($lib->camel2dashed($class) . '/partials/_form.html.twig')) {
-                if ($class == "Commandes") {
-                    $client= $this->em->getRepository(Client::class)->findOneBy(['nom' => "cash",'prenom'=>"cash"]);
-                    $entity->setAcheteur($client);
-                }
                 $form = $this->createForm(get_class(new $classtype()), $entity);
                 $form->handleRequest($request);
                 

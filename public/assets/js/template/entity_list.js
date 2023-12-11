@@ -96,7 +96,7 @@ function initDatatable() {
             handleEditRows();
             handleDeleteRows();
             handleshow();
-            annulerCommande()
+            annulerFacture()
             //handlelistes();
             KTMenu.createInstances();
         });
@@ -190,7 +190,7 @@ function Searchbtn() {
             let itsform = $(elt);
             data[`${$(itsform).attr("name")}`] = itsform.val();
         })
-        console.log(data,'data')
+        // console.log(data,'data')
         etatDatatable(data);
         
     });
@@ -250,12 +250,6 @@ function handleEditRows() {
                         KTAll.init();*/
                         initializeContainer();
                         //let form=
-                        if($(form).attr('name').includes('livraison')){
-                            GESTIONLIVRAISON.init();
-                        }
-                        if($(form).attr('name').includes('commande_client')){
-                            gestionVente.init();
-                        }
                         if($(form).attr('name')=='facture'){
                             GESTIONFACTURE.init();
                         }
@@ -478,7 +472,7 @@ function initToggleToolbar() {
     }
 }
 
- function  annulerCommande(){
+ function  annulerFacture(){
     const annuler_rows = document.querySelectorAll('[data-kt-entity-table-filter="annuler_row"]');
     if (annuler_rows != null && tableau != null) {
         annuler_rows.forEach(d => {
@@ -499,14 +493,15 @@ function initToggleToolbar() {
                         e.target.dataset.token = data.token;
                     }
                 });
+                //console.log(tr);
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    title: "Etes-vous sûr de vouloir annuler la commande?",
-                    text:"Ref.: " + entityField +', Date: ' + tr[2].innerText+'\r\n'+', Montant HT: ' + tr[4].innerText+',  Montant TTC: '+tr[6].innerText,
+                    title: "Etes-vous sûr de vouloir supprimer la facture?",
+                    text:"Ref.: " + entityField +', Date: ' + tr[2].innerText+'\r\n'+', Montant Facture: '+tr[3].innerText+'\r\n',
                     icon: "question",
                     showCancelButton: true,
                     buttonsStyling: false,
-                    confirmButtonText: "Oui, annuler!",
+                    confirmButtonText: "Oui, supprimer!",
                     cancelButtonText: "Non, laisser!",
                     customClass: {
                         confirmButton: "btn fw-bold btn-danger",
@@ -514,11 +509,11 @@ function initToggleToolbar() {
                     }
                 }).then(function (result) {
                     if (result.value) {
-                        console.log(result.value,'warning')
+                        //console.log(result.value,'warning')
                         Swal.fire({
-                            title: "Motif d'annulation de la commande " + entityField,
+                            title: "Motif de suppression de la facture " + entityField,
                             input: 'textarea',
-                            inputPlaceholder: "Motif d'annulation de la commande",
+                            inputPlaceholder: "Motif d'annulation de la facture",
                             inputAttributes: {
                               autocapitalize: 'off'
                             },
@@ -529,7 +524,7 @@ function initToggleToolbar() {
                               if(motif) {
                                 return $.ajax({
                                     type: "GET",
-                                    url: verifier_comd_statut_url,
+                                    url: verifier_fact_statut_url,
                                     data: { code:  entityField,motif:motif},
                                     dataType: "json",
                                     success: function (data) {
@@ -550,7 +545,7 @@ function initToggleToolbar() {
                             },
                             allowOutsideClick: () => !Swal.isLoading()
                           }).then((result) => {
-                            if (result.value.estannuler) {
+                            if (result.value.estSup) {
                                 console.log(result.value,'allowOutsideClick');
                                 $.ajax({
                                     type: "GET",
@@ -582,7 +577,7 @@ function initToggleToolbar() {
                                 });
                             }else{
                                 Swal.fire({
-                                    text: "la commande "+ entityField+" a été  déja annulée",
+                                    text: "La facture "+ entityField+" a été  déja supprimé",
                                     icon: "error",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok",
@@ -594,10 +589,10 @@ function initToggleToolbar() {
                           })
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: "L'annulation de la commande "+ entityField+" a été annulée",
+                            text: "Suppression de la facture "+ entityField+" a été interrompue",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok",
+                            confirmButtonText: "Merci",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-primary",
                             }

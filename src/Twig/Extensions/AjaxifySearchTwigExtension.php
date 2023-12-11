@@ -44,10 +44,14 @@ class AjaxifySearchTwigExtension extends AbstractExtension
         $template .= 'search: "{{ search_url }}"';
         $template .= '}';
         $template .= '</script>';
-        dd("Ici");
+        //dd($this->router->generate('ajaxify_search_count_all'), $this->router->generate('ajaxify_search_search')); 
+        dd($this->twig->createTemplate($template)->render(array(
+            'count_url'     => "gestionFacture/public/ajaxify-search/count", //$this->router->generate('ajaxify_search_count_all'),
+            'search_url'    => "gestionFacture/public/ajaxify-search/search", //$this->router->generate('ajaxify_search_search'),
+        )));
         return $this->twig->createTemplate($template)->render(array(
-            'count_url'     => $this->router->generate('ajaxify_search_count_all'),
-            'search_url'    => $this->router->generate('ajaxify_search_search'),
+            'count_url'     => "gestionFacture/public/ajaxify-search/count", //$this->router->generate('ajaxify_search_count_all'),
+            'search_url'    => "gestionFacture/public/ajaxify-search/search", //$this->router->generate('ajaxify_search_search'),
         ));
     }
 

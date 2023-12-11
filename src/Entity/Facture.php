@@ -54,6 +54,9 @@ class Facture
     #[ORM\Column]
     private ?int $acteur = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $motif = null;
+
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
@@ -268,6 +271,18 @@ class Facture
     public function setActeur(int $acteur): static
     {
         $this->acteur = $acteur;
+
+        return $this;
+    }
+
+    public function getMotif(): ?string
+    {
+        return $this->motif;
+    }
+
+    public function setMotif(?string $motif): static
+    {
+        $this->motif = $motif;
 
         return $this;
     }

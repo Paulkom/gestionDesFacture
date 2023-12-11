@@ -67,7 +67,7 @@
                                 </div>
                                 <div class="menu-item">
                                     <a class="menu-link py-3 kt-menu-proto" href="javascript:void(0)" id="kt_modepaiement_list" onclick="activateMenu(this);"
-                                        data-content="{% autoescape 'html' %}{{ include('mode_paiement/partials/_card_list.html.twig', {'idMenu':'kt_modepaiement_list'})|escape }}{% endautoescape %}">
+                                        data-content="{% autoescape 'html' %}{{ include('mode_paiement/partials/_card_list.html.twig', {'idMenu':'kt_mode_paiement_table'})|escape }}{% endautoescape %}">
                                         <span class="menu-bullet">
                                             <span class="bullet bullet-dot"></span>
                                         </span>
@@ -98,4 +98,5 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('assets/js/custom/apps/facture/facture.js') }}"></script>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Facture;
 use App\Entity\ModePaiement;
 use App\Form\ModePaiementType;
 use App\Repository\ModePaiementRepository;
@@ -34,6 +35,14 @@ class ModePaiementController extends AbstractController
         return $this->renderForm('mode_paiement/index.html.twig', [
             'mode_paiements' => $modePaiementRepository->findAll(),
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/show', name: 'app_depense_show', methods: ['GET'])]
+    public function show2(Facture $facture): Response
+    {
+        return $this->render('facture/show.html.twig', [
+            'entitie' => $facture,
         ]);
     }
 

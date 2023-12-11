@@ -62,11 +62,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $actif = null;
 
-    private ?\DateTimeInterface $createdAt = null;
+    // private ?\DateTimeInterface $createdAt = null;
 
-    private ?\DateTimeInterface $updatedAt = null;
+    // private ?\DateTimeInterface $updatedAt = null;
 
-    private ?\DateTimeInterface $deletedAt = null;
+    // private ?\DateTimeInterface $deletedAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $estCollaborateur = null;
@@ -82,6 +82,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?array $profil = null;
+
+    #[ORM\Column]
+    private ?bool $estSup = null;
 
     public function __construct()
     {
@@ -382,6 +385,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfil(?array $profil): static
     {
         $this->profil = $profil;
+
+        return $this;
+    }
+
+    public function isEstSup(): ?bool
+    {
+        return $this->estSup;
+    }
+
+    public function setEstSup(bool $estSup): static
+    {
+        $this->estSup = $estSup;
 
         return $this;
     }

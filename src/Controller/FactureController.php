@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Commentaire;
 use App\Entity\Facture;
+use App\Entity\Paiement;
+use App\Form\CommentaireAjoutType;
 use App\Form\FactureType;
 use App\Repository\CommentaireRepository;
 use App\Repository\FactureRepository;
 use App\Repository\ModeleRepository;
 use App\Repository\SocieteRepository;
 use App\Repository\UserRepository;
+use App\Repository\UtilisateurRepository;
 use App\Services\ApiMecef;
 use App\Services\LibrairieService;
 use DateTime;
@@ -47,6 +50,8 @@ class FactureController extends AbstractController
             $commentaire->setMessage("Veuillez recevoir, Mme/Mr la personne chargée de l'étude des factures, la facture suivante pour évaluation. Merci");
             $commentaireRepository->add($commentaire);
 
+
+            
 // Envoie de mail
             $email = (new Email())
             ->from('paulk379@gmail.com')
@@ -60,13 +65,14 @@ class FactureController extends AbstractController
             ->html('<p>See Twig integration for better HTML integration!</p>');
             $mailer->send($email);
 /// Fin de l'envoie du mail
+
             if($facture->getId() != null){
                 $id = $facture->getId();
                 $statu = $form->get("truc")->getData();
                 $facture = new Facture();
 
                 $form = $this->createForm(FactureType::class, $facture);
-                $html = $this->renderView('facture/partials/_card_form.html.twig', ['commande' => $facture, 'form' => $form->createView() ]);
+                $html = $this->renderView('facture/partials/_card_form.html.twig', ['facture' => $facture, 'form' => $form->createView() ]);
                 $comp ="§".$id."§".$statu."§".$html;
                 return new JsonResponse("La facture a été créée avec succès. ". $comp);
             }
@@ -78,10 +84,9 @@ class FactureController extends AbstractController
         ]);
     }
 
-    #[Route('/impression/docu', name: 'imprime_commande', methods: ['GET', 'POST'])]
+    #[Route('/impression/docu', name: 'imprime_facture', methods: ['GET', 'POST'])]
     public function impression(LibrairieService $library, SocieteRepository $sociRep, Request $request, FactureRepository $factureCliRe){
         $id = $request->request->get('id');
-        //$estCommande = $request->request->get('commande');
         $type = ((!empty($request->request->get('type')))) ? $request->request->get('type') : "" ; 
         $format = "A4-P";
         $ent = null;
@@ -90,7 +95,6 @@ class FactureController extends AbstractController
             $ent = ($sociRep->find($this->getUser()));
         }
         
-        //dd($ent,$signataires);
         $facture = $factureCliRe->find($id);
         
         $htmlPage = $this->renderView("Facture/document/factureA4.html.twig",[
@@ -105,26 +109,49 @@ class FactureController extends AbstractController
 
         
         return $library->mpdf([$htmlPage,$htmlPage],"Facture",$format);
-        // if($type !== ""){
-        //     return $library->mpdf([$htmlPage,$htmlPage],"Facture",$format); 
-        // }else{
-        //     return $library->mpdf([$htmlPage,$htmlPage,$bonHtml],"Facture",$format);
-        // }
         
+    }
+
+    #[Route('/{id}/show', name: 'facture_show',  methods: ['GET', 'POST'])]
+    public function show2(Facture $facture, Request $request, CommentaireRepository $commentaireRepository, UtilisateurRepository $userresp): Response
+    {
+        if($this->getUser()->isEstAdmin() == true){
+            $commentaire = new Commentaire();
+            $form = $this->createForm(CommentaireAjoutType::class, $commentaire);
+            $form->handleRequest($request);
+            if($form->isSubmitted()){
+                $commentaire->setFacture($facture);
+                $commentaire->setExpediteur($this->getUser());
+                $commentaire->setObjet("Réponse");
+                $commentaire->setEstLue(false);
+                $commentaire->setDestinataire($userresp->find($facture->getActeur()));
+                //dd($commentaire);
+                $commentaireRepository->add($commentaire);
+                
+                return $this->redirectToRoute("facture_index", [], Response::HTTP_SEE_OTHER);
+            }
+        }
+        
+        return $this->renderForm('facture/show.html.twig', [
+            'entitie' => $facture,
+            'form'=> $this->getUser()->isEstAdmin()? $form : null,
+        ]);
     }
 
 
 
-    #[Route('/verifie/statut', name: 'app_commande_verifie_statut', methods: ['POST','GET'])]
-    public function verifie_statut(Request $request, FactureRepository $factureClientRepository): Response
+    #[Route('/verifie/statut', name: 'app_facture_verifie_statut', methods: ['POST','GET'])]
+    public function verifie_statut(Request $request, FactureRepository $factureRepository): Response
     {
         $code = $request->query->get('code');
         $motif = $request->query->get('motif');
-       $statut = $factureClientRepository->findOneBy(['refCmd'=>$code,'statut'=>'Annuler']);
-       if ($statut) {
-            return new JsonResponse(['estannuler'=>false,'motif'=>$motif]);
-       }else{
-            return new JsonResponse(['estannuler'=>true,'motif'=>$motif]);
+       $statut = $factureRepository->findOneBy(['refFact'=>$code])->getStatut();
+       if ($statut ) {
+            return new JsonResponse(['estSup'=>false,'motif'=>$motif]);
+       }
+       else
+       {
+            return new JsonResponse(['estSup'=>true,'motif'=>$motif]);
        }
     }
 
@@ -143,17 +170,16 @@ class FactureController extends AbstractController
             return $this->redirectToRoute('app_Facture_index', [], Response::HTTP_SEE_OTHER);
         }
         return $this->renderForm('facture/new.html.twig', [
-            'commande' => $facture,
+            'facture' => $facture,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_Facture_show', methods: ['GET'])]
-    public function show(Facture $facture): Response
+    #[Route('/show/{id}', name: 'app_facture_show', methods: ['GET','POST'])]
+    public function show(Facture $facture):Response
     {
-        return $this->render('Facture/show.html.twig', [
-            'commande' => $facture,
-        ]);
+        $results['html'] = $this->renderView('facture/show.html.twig', ['facture' => $facture,]);
+        return new JsonResponse($results);
     }
 
     #[Route('/{id}/edit', name: 'app_Facture_edit', methods: ['GET', 'POST'])]
@@ -169,19 +195,34 @@ class FactureController extends AbstractController
         }
 
         return $this->renderForm('Facture/edit.html.twig', [
-            'commande' => $facture,
+            'facture' => $facture,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_Facture_delete', methods: ['POST'])]
-    public function delete(Request $request, Facture $facture, EntityManagerInterface $entityManager): Response
+    #[Route('/suppression/{key}/facture', name: 'app_annulationFacture', methods: ['GET', 'POST'])]
+    public function annulationFacture($key,Request $request,EntityManagerInterface $em)
     {
-        if ($this->isCsrfTokenValid('delete'.$facture->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($facture);
-            $entityManager->flush();
-        }
+        $motif=$request->query->get('motif');
 
-        return $this->redirectToRoute('app_Facture_index', [], Response::HTTP_SEE_OTHER);
+        /** @var Facture */
+        $facture = $em->getRepository(Facture::class)->find((int)$key);
+        $paiements = $em->getRepository(Paiement::class)->paiementsFacture($facture);
+        if(!empty($paiements)){
+            return new JsonResponse("Erreur, Cette facture a déjà fait l'objet d'un paiement.");
+        }else{
+            if($facture->getId() != null){
+                    $facture->setStatut('Supprimer');
+                    $facture->setDeletedAt(new DateTime());
+                    $facture->setEstSup(true);
+                    $facture->setMotif($motif);
+                    $em->getRepository(Facture::class)->add($facture);
+                    return new JsonResponse("La facture ". $facture->getRefFact() ." a été annulée avec succès");
+                
+            } else{
+                return new JsonResponse("Erreur, facture non trouvée!!!§§§§msg_error");       
+            }
+        }
     }
+
 }
