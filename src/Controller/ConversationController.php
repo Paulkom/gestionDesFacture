@@ -20,7 +20,7 @@ class ConversationController extends AbstractController
         ]);
     }
 
-    #[Route('/show/{id}', name: 'conversation', methods:["GET","POST"])]
+    #[Route('/show/{id}', name: 'conversation_show', methods:["GET","POST"])]
     public function show(FactureRepository $factureRepository): Response
     {
         $user = $this->getUser();

@@ -90,6 +90,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->actif = true;
         $this->commentaires = new ArrayCollection();
+        $this->estSup = 0;
     }
 
     public function getId(): ?int
