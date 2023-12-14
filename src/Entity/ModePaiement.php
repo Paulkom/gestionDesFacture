@@ -7,6 +7,7 @@ use App\Repository\ModePaiementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: ModePaiementRepository::class)]
 class ModePaiement
@@ -31,6 +32,7 @@ class ModePaiement
 
     public function __construct()
     {
+        $this->createdAt = new DateTime();
         $this->paiements = new ArrayCollection();
     }
 

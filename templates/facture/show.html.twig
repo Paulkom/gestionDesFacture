@@ -69,8 +69,22 @@
                     {% endfor %}    
                 </table>
             </div>
-        {% if form is defined and app.user.estAdmin == true %}
+       
              <h4 class="mt-10"> Commentaire <span class="text-danger">Faites un commentaire</span></h4>
+             {% if commentaires is defined %}
+             <div class="table-responsive">
+                <table class="table align-middle table-row-dashed fs-6 gy-5">
+                    {% for comm in commentaires %}
+                    <tr>
+                        <th class="text-gray-500 fw-bolder fs-7 text-uppercase">Message:</th>
+                        <td>{{ comm.message }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+              {% if form is defined and app.user.estAdmin == true %}
                 <div class="table-responsive">
                     {{ form_start(form) }}
                         <div class="row g-2" style=" width:100%;">
@@ -95,9 +109,9 @@
                         </div>
 
                     {{ form_end(form) }}
-                
+                 
                 </div>
-        {% endif %}
+       {% endif %}
         </div>
     </div>
 </div>

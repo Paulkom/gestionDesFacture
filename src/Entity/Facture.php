@@ -7,6 +7,7 @@ use App\Repository\FactureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FactureRepository::class)]
@@ -65,6 +66,7 @@ class Facture
         $this->statut = "En cours";
         $this->estValide = 0;
         $this->estSup = 0;
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int

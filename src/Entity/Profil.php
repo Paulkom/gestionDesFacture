@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Traits\Timestampable;
 use App\Repository\ProfilRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfilRepository::class)]
@@ -26,6 +27,7 @@ class Profil
 
     public function __construct()
     {
+        $this->createdAt = new DateTime();
         $this->estSup = false;
     }
 

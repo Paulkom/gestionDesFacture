@@ -7,6 +7,7 @@ use App\Repository\MenuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MenuRepository::class)]
@@ -47,6 +48,7 @@ class Menu
 
     public function __construct()
     {
+        $this->createdAt = new DateTime();
         $this->sousMenus = new ArrayCollection();
     }
 

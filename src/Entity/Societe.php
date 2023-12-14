@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\Get;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Traits\Timestampable;
+use DateTime;
 use App\Repository\SocieteRepository;
 #[ORM\Entity(repositoryClass: SocieteRepository::class)]
 
@@ -84,7 +85,7 @@ class Societe
 
     public function __construct()
     {
-
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int

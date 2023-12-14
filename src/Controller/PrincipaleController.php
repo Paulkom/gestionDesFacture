@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FactureRepository;
 use App\Repository\MenuRepository;
 use App\Services\LibrairieService;
 use App\Services\Parameters;
@@ -26,10 +27,19 @@ class PrincipaleController extends AbstractController
     }
 
     #[Route('/admin', name: 'principal')]
-    public function index(): Response
+    public function index(FactureRepository $factureRepository): Response
     {
+        $user = $this->getUser();
+        $fatures =  $factureRepository->dixDerniereFactures($user);
+        $sommeFacture = $factureRepository->sommefactures($user);
+        $sommeReste = $factureRepository->sommeReteApayerfactures($user);
+       $paie = ((float)$sommeFacture[1] -(float)$sommeReste[1]);
         return $this->render('base.html.twig', [
-           
+            'factures' => $fatures,
+            "sommeFacture"=>(float)$sommeFacture[1] == 0 ? 0 : $sommeFacture[1],
+            "sommeReste"=>(float)$sommeReste[1] == 0 ? 0 :$sommeReste[1],
+            "payer"=> $paie,
+            "pourcentage"=> (float)$sommeFacture[1] ==0 ? 0 : round((((float)$paie / (float)$sommeFacture[1]) * 100),2),
         ]);
     }
 
@@ -41,10 +51,6 @@ class PrincipaleController extends AbstractController
 
     public function afficherMenus(MenuRepository $menuRepository, EntityManagerInterface $em)
     {
-        // $user = $this->getUser();
-        // $userRoles = $user->getRoles();
-        
-        // $em = $this->getDoctrine()->getManager();
         $menus = $em->createQuery("
             SELECT m
             FROM App\Entity\Menu m

@@ -150,6 +150,18 @@ class FonctionBaseController extends AbstractController
             $default_alias = "o";
             $list_columns_result = "";
             $list_join_columns_result = "";
+
+            $elementJointure = "";
+            foreach ($parameters['champs'] as $key => $field) {
+                if(str_contains($field, ":")){
+                    $div = explode(":", $field);
+                    $elementJointure ='App\\Entity\\'. ucfirst($div[0]);
+                }
+            }
+            dump($elementJointure);
+            dd("Ok");
+            
+
             $join_alias = [];
             $join_sql = "";
             $sql = "SELECT :columns \nFROM $classname $default_alias ";
@@ -197,26 +209,43 @@ class FonctionBaseController extends AbstractController
                         $all_cols = $native::GetAllColumnsFromTable($database_table_name);
                         //Récupérer celles qui ne sont ni clé primaire, ni étrangère
                         $h = 0;
+
                         $concat = "";
+
                         $alias = "";
+
                         foreach ($all_cols as $col) {
+
                             if ($col['Key'] === "") {
+
                                 $assoc_col = lcfirst($lib->camelize($col['Field']));
+
                                 if (property_exists('App\\Entity\\' . ucfirst($join_table_name), $assoc_col) && in_array($assoc_col, $champs)) {
+                                    
                                     $h++;
+
                                     //if($h === 1) $concat .= "CONCAT(";
                                     $concat .= $default_alias . '_' . $cpt . ".$assoc_col, ' ', ";
+
                                     $alias .= strtolower($assoc_col) . "_";
+
                                 }
                             }
                             
                         }
+
                         $alias .= $cpt;
+
                         /*$concat = rtrim($concat, ", ' ' ");*/
+
                         $tab = explode(',', rtrim($concat, ", ' ' "));
+
                         if (sizeof($tab) > 1) {
+
                             $concat = substr_replace(rtrim($concat, ", "), "CONCAT(", 0, 0);
+
                             $concat = substr_replace($concat, ")", strlen($concat), 0);
+
                         } else
                             $concat = rtrim($concat, ", ' ' ");
 

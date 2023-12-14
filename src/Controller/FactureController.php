@@ -15,6 +15,7 @@ use App\Repository\UserRepository;
 use App\Repository\UtilisateurRepository;
 use App\Services\ApiMecef;
 use App\Services\LibrairieService;
+use App\Services\SmsEnvoie;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use NumberFormatter;
@@ -41,8 +42,8 @@ class FactureController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             
             $facture->setEstSup(0);
+            $facture->setMontantRest($facture->getMontantFac());
             $facture->setActeur(($this->getUser())->getId());
-            // $facture->setStatut("Facture");
             $factureRepository->add($facture);
             $commentaire = new Commentaire();
             $commentaire->setFacture($facture);
@@ -113,12 +114,14 @@ class FactureController extends AbstractController
     }
 
     #[Route('/{id}/show', name: 'facture_show',  methods: ['GET', 'POST'])]
-    public function show2(Facture $facture, Request $request, CommentaireRepository $commentaireRepository, UtilisateurRepository $userresp): Response
+    public function show2(Facture $facture, SmsEnvoie $sms, Request $request, CommentaireRepository $commentaireRepository, UtilisateurRepository $userresp): Response
     {
+        $commentaires = $commentaireRepository->troisDerniersCommentaireDeFacture($facture);
         if($this->getUser()->isEstAdmin() == true){
             $commentaire = new Commentaire();
             $form = $this->createForm(CommentaireAjoutType::class, $commentaire);
             $form->handleRequest($request);
+
             if($form->isSubmitted()){
                 $commentaire->setFacture($facture);
                 $commentaire->setExpediteur($this->getUser());
@@ -126,6 +129,7 @@ class FactureController extends AbstractController
                 $commentaire->setEstLue(false);
                 $commentaire->setDestinataire($userresp->find($facture->getActeur()));
                 //dd($commentaire);
+                $sms->sendSms("+22998428515","",$commentaire->getMessage());
                 $commentaireRepository->add($commentaire);
                 
                 return $this->redirectToRoute("facture_index", [], Response::HTTP_SEE_OTHER);
@@ -134,6 +138,7 @@ class FactureController extends AbstractController
         
         return $this->renderForm('facture/show.html.twig', [
             'entitie' => $facture,
+           "commentaires"=> $commentaires,
             'form'=> $this->getUser()->isEstAdmin()? $form : null,
         ]);
     }

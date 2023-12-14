@@ -80,9 +80,7 @@ class PaiementType extends AbstractType
                         ->select('c')
                         ->from('App\\Entity\\Facture', 'c');
                         $qb->andwhere("c.montantRest != 0 OR c.montantRest IS NULL")->orderBy('c.refFact','DESC')
-                        
                 ;
-                //dd($qb->getDQL());
                 return $qb;
             },
             'choice_attr' => function(Facture $facture){

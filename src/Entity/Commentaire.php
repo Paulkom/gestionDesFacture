@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Traits\Timestampable;
 use App\Repository\CommentaireRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +37,11 @@ class Commentaire
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
     private ?Facture $facture = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
 
     public function getId(): ?int
     {

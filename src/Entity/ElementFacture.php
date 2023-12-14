@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\Traits\Timestampable;
 use App\Repository\ElementFactureRepository;
 use Doctrine\DBAL\Types\Types;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ElementFactureRepository::class)]
@@ -38,6 +39,7 @@ class ElementFacture
     public function __construct()
     {
         $this->estSup = false;
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int

@@ -37,6 +37,37 @@ class CommentaireRepository extends ServiceEntityRepository
         }
     }
 
+public function troisDerniersCommentaireDeFacture($facture): array
+   {
+       return $this->createQueryBuilder('c')
+            ->select("c.message", )
+            ->innerJoin("c.facture",'f')
+           ->andWhere('f.id = :val')
+           ->setParameter('val', $facture->getId())
+           ->andWhere('c.objet = :val2')
+           ->setParameter('val2', "Réponse")
+           ->orderBy('c.id', 'DESC')
+           ->setMaxResults(3)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+   public function commentairesDeFacture($facture): array
+   {
+       return $this->createQueryBuilder('c')
+            ->select("c.message, e.id, c.createdAt" )
+            ->leftJoin("c.expediteur","e")
+            ->innerJoin("c.facture",'f')
+           ->andWhere('f.id = :val')
+           ->setParameter('val', $facture)
+           ->orderBy('c.id', 'DESC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+
 
 //    /**
 //     * @return Commentaire[] Returns an array of Commentaire objects

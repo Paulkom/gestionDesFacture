@@ -44,9 +44,9 @@ class FactureRepository extends ServiceEntityRepository
         $query =  $this->createQueryBuilder('f')
             ->andWhere('f.estSup = :sup')
             ->setParameter("sup",0);
-            //dd($user->isEstAdmin());
+            //dd( $user->isEstAdmin());
 
-            if($user->isEstAdmin())
+            if(!$user->isEstAdmin())
             {
                 $query->andWhere('f.acteur = :val')
                 ->setParameter('val', $user->getId());
@@ -57,8 +57,7 @@ class FactureRepository extends ServiceEntityRepository
                 ->setParameter('val3', 0);
             $query->orderBy('f.id', 'DESC');
             ;
-
-       return $query->getQuery()->getArrayResult();
+       return $query->getQuery()->getResult();
         
     }
 
@@ -97,6 +96,49 @@ class FactureRepository extends ServiceEntityRepository
 //            ->getResult()
 //        ;
 //    }
+
+   public function dixDerniereFactures($user)
+   {
+       $query =  $this->createQueryBuilder('f');
+       if(!$user->isEstAdmin()){
+        $query->andWhere('f.acteur = :val')
+        ->setParameter('val', $user->getId());
+       }
+       return $query->orderBy('f.id', 'DESC')
+           ->setMaxResults(10)
+           ->getQuery()
+           ->getResult()
+       ;
+        
+   }
+
+   public function sommefactures($user)
+   {
+       $query =  $this->createQueryBuilder('f')
+       ->select("SUM(f.montantFac)");
+       if(!$user->isEstAdmin()){
+        $query->andWhere('f.acteur = :val')
+        ->setParameter('val', $user->getId());
+       }
+       return $query->orderBy('f.id', 'DESC')
+           ->getQuery()
+           ->getSingleResult()
+       ;  
+   }
+
+   public function sommeReteApayerfactures($user)
+   {
+       $query =  $this->createQueryBuilder('f')
+       ->select("SUM(f.montantRest)");
+       if(!$user->isEstAdmin()){
+        $query->andWhere('f.acteur = :val')
+        ->setParameter('val', $user->getId());
+       }
+       return $query->orderBy('f.id', 'DESC')
+           ->getQuery()
+           ->getSingleResult()
+       ;  
+   }
 
 //    public function findOneBySomeField($value): ?Facture
 //    {

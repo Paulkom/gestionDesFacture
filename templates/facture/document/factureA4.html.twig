@@ -120,8 +120,8 @@
                         {% for c in facture.elementFactures  %}
                             <tr> 
                                 <td class="bod" style=" font-size: 12px; padding: 6px 6px 6px 6px; text-align:left;">{{ c.designation }}</td>
-                                <td class="bod" style=" font-size: 12px; padding: 6px 6px 6px 6px;  text-align:right;">{{c.qte| number_format(3, ',', ' ')? ("RSA") : c.qte| number_format(2, ',', ' ')}}</td>
-                                <td class="bod" style=" font-size: 12px; padding: 6px 6px 6px 6px;  text-align:right;">{{c.valeur| number_format(2, ',', ' ') ? ("RSA") : c.valeur| number_format(2, ',', ' ')}}</td>
+                                <td class="bod" style=" font-size: 12px; padding: 6px 6px 6px 6px;  text-align:right;">{{c.qte| number_format(3, ',', ' ') == null ? ("RSA") : c.qte| number_format(2, ',', ' ')}}</td>
+                                <td class="bod" style=" font-size: 12px; padding: 6px 6px 6px 6px;  text-align:right;">{{c.valeur| number_format(2, ',', ' ')  == null ? ("RSA") : c.valeur| number_format(2, ',', ' ')}}</td>
                                 <td class="bod" style=" font-size: 12px; padding: 6px 6px 6px 6px;  text-align:right;">{{c.mntTotal == null ? ("RSA") : c.mntTotal| number_format(2, ',', ' ') }}</td>
                             </tr>
                         {% endfor %}

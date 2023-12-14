@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\Traits\Timestampable;
 use App\Repository\UtilisateurRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -91,6 +92,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         $this->actif = true;
         $this->commentaires = new ArrayCollection();
         $this->estSup = 0;
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int

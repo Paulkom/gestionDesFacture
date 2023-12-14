@@ -68,13 +68,13 @@
 			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
 				<!--begin::Aside-->
-				{#{% include "layouts/menu.html.twig" %}#}
 				{{ render(controller('App\\Controller\\PrincipaleController::afficherMenus')) }}
 				<!--end::Aside-->
 				<!--begin::Wrapper-->
 					{% block wrapper %}
 						<div
-						class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper"> <!--begin::Header-->
+						class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper"> 
+						<!--begin::Header-->
 						{% include "layouts/topbar.html.twig" %}
 						<!--end::Header-->
 						<!--begin::Content-->
@@ -190,7 +190,7 @@
 															<!--end::Info-->
 														</div>
 														<!--end::User-->
-														<!--begin::Actions-->
+														{# <!--begin::Actions-->
 														<div class="d-flex my-4">
 															<a
 																href="#" class="btn btn-sm btn-light me-2" id="kt_user_follow_button">
@@ -298,7 +298,7 @@
 															</div>
 															<!--end::Menu-->
 														</div>
-														<!--end::Actions-->
+														<!--end::Actions--> #}
 													</div>
 													<!--end::Title-->
 													<!--begin::Stats-->
@@ -324,7 +324,7 @@
 																			</svg>
 																		</span>
 																		<!--end::Svg Icon-->
-																		<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">0</div>
+																		<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{ sommeFacture }}" data-kt-countup-prefix="(XOF)">0</div>
 																	</div>
 																	<!--end::Number-->
 																	<!--begin::Label-->
@@ -346,7 +346,7 @@
 																			</svg>
 																		</span>
 																		<!--end::Svg Icon-->
-																		<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="80">0</div>
+																		<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{sommeReste}}" data-kt-countup-prefix="(XOF)">0</div>
 																	</div>
 																	<!--end::Number-->
 																	<!--begin::Label-->
@@ -368,7 +368,7 @@
 																			</svg>
 																		</span>
 																		<!--end::Svg Icon-->
-																		<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%">0</div>
+																		<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="{{payer}}" data-kt-countup-prefix="(XOF)">0</div>
 																	</div>
 																	<!--end::Number-->
 																	<!--begin::Label-->
@@ -383,11 +383,11 @@
 														<!--begin::Progress-->
 														<div class="d-flex align-items-center w-200px w-sm-300px flex-column mt-3">
 															<div class="d-flex justify-content-between w-100 mt-auto mb-2">
-																<span class="fw-bold fs-6 text-gray-400">Profile Compleation</span>
-																<span class="fw-bolder fs-6">50%</span>
+																<span class="fw-bold fs-6 text-gray-400">Progression de la Paie</span>
+																<span class="fw-bolder fs-6">{{ pourcentage ~ " %"}}</span>
 															</div>
 															<div class="h-5px mx-3 w-100 bg-light mb-3">
-																<div class="bg-success rounded h-5px" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+																<div class="bg-success rounded h-5px" role="progressbar" style="width: {{pourcentage}}%;" aria-valuenow="{{ pourcentage }}" aria-valuemin="0" aria-valuemax="100"></div>
 															</div>
 														</div>
 														<!--end::Progress-->
@@ -418,7 +418,7 @@
 													</svg>
 												</span>
 												<!--end::Svg Icon-->
-												<h3 class="fw-bolder m-0 text-gray-800">Jan 23, 2022</h3>
+												<h3 class="fw-bolder m-0 text-gray-800">{{ "now"|date("d/m/Y") }}</h3>
 											</div>
 											<!--end::Title-->
 											<!--begin::Toolbar-->
@@ -508,7 +508,7 @@
 																	<div
 																		class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5">
 																		<!--begin::Title-->
-																		<a href="../../demo1/dist/apps/projects/project.html" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Meeting with customer</a>
+																		<a href="#" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Meeting with customer</a>
 																		<!--end::Title-->
 																		<!--begin::Label-->
 																		<div class="min-w-175px pe-2">
@@ -541,7 +541,7 @@
 																		</div>
 																		<!--end::Progress-->
 																		<!--begin::Action-->
-																		<a href="../../demo1/dist/apps/projects/project.html" class="btn btn-sm btn-light btn-active-light-primary">View</a>
+																		<a href="#" class="btn btn-sm btn-light btn-active-light-primary">View</a>
 																		<!--end::Action-->
 																	</div>
 																	<!--end::Record-->
@@ -549,7 +549,7 @@
 																	<div
 																		class="d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-0">
 																		<!--begin::Title-->
-																		<a href="../../demo1/dist/apps/projects/project.html" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Project Delivery Preparation</a>
+																		<a href="#" class="fs-5 text-dark text-hover-primary fw-bold w-375px min-w-200px">Project Delivery Preparation</a>
 																		<!--end::Title-->
 																		<!--begin::Label-->
 																		<div class="min-w-175px">
@@ -577,7 +577,7 @@
 																		</div>
 																		<!--end::Progress-->
 																		<!--begin::Action-->
-																		<a href="../../demo1/dist/apps/projects/project.html" class="btn btn-sm btn-light btn-active-light-primary">View</a>
+																		<a href="#" class="btn btn-sm btn-light btn-active-light-primary">View</a>
 																		<!--end::Action-->
 																	</div>
 																	<!--end::Record-->
@@ -694,7 +694,7 @@
 																			<!--begin::Info-->
 																				<div
 																				class="ms-1 fw-bold"> <!--begin::Desc-->
-																				<a href="../../demo1/dist/apps/projects/project.html" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
+																				<a href="#" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
 																				<!--end::Desc-->
 																				<!--begin::Number-->
 																				<div class="text-gray-400">1.9mb</div>
@@ -707,7 +707,7 @@
 																		<div
 																			class="d-flex flex-aligns-center pe-10 pe-lg-20">
 																			<!--begin::Icon-->
-																			<img alt="../../demo1/dist/apps/projects/project.html" class="w-30px me-3" src="assets/media/svg/files/doc.svg"/>
+																			<img alt="#" class="w-30px me-3" src="assets/media/svg/files/doc.svg"/>
 																			<!--end::Icon-->
 																			<!--begin::Info-->
 																				<div
@@ -725,7 +725,7 @@
 																		<div
 																			class="d-flex flex-aligns-center">
 																			<!--begin::Icon-->
-																			<img alt="../../demo1/dist/apps/projects/project.html" class="w-30px me-3" src="assets/media/svg/files/css.svg"/>
+																			<img alt="#" class="w-30px me-3" src="assets/media/svg/files/css.svg"/>
 																			<!--end::Icon-->
 																			<!--begin::Info-->
 																				<div
@@ -1197,7 +1197,7 @@
 																			<!--begin::Info-->
 																				<div
 																				class="ms-1 fw-bold"> <!--begin::Desc-->
-																				<a href="../../demo1/dist/apps/projects/project.html" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
+																				<a href="#" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
 																				<!--end::Desc-->
 																				<!--begin::Number-->
 																				<div class="text-gray-400">1.9mb</div>
@@ -1210,7 +1210,7 @@
 																		<div
 																			class="d-flex flex-aligns-center pe-10 pe-lg-20">
 																			<!--begin::Icon-->
-																			<img alt="../../demo1/dist/apps/projects/project.html" class="w-30px me-3" src="assets/media/svg/files/doc.svg"/>
+																			<img alt="#" class="w-30px me-3" src="assets/media/svg/files/doc.svg"/>
 																			<!--end::Icon-->
 																			<!--begin::Info-->
 																				<div
@@ -1228,7 +1228,7 @@
 																		<div
 																			class="d-flex flex-aligns-center">
 																			<!--begin::Icon-->
-																			<img alt="../../demo1/dist/apps/projects/project.html" class="w-30px me-3" src="assets/media/svg/files/css.svg"/>
+																			<img alt="#" class="w-30px me-3" src="assets/media/svg/files/css.svg"/>
 																			<!--end::Icon-->
 																			<!--begin::Info-->
 																				<div
@@ -1774,7 +1774,7 @@
 																			<!--begin::Info-->
 																				<div
 																				class="ms-1 fw-bold"> <!--begin::Desc-->
-																				<a href="../../demo1/dist/apps/projects/project.html" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
+																				<a href="#" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
 																				<!--end::Desc-->
 																				<!--begin::Number-->
 																				<div class="text-gray-400">1.9mb</div>
@@ -1787,7 +1787,7 @@
 																		<div
 																			class="d-flex flex-aligns-center pe-10 pe-lg-20">
 																			<!--begin::Icon-->
-																			<img alt="../../demo1/dist/apps/projects/project.html" class="w-30px me-3" src="assets/media/svg/files/doc.svg"/>
+																			<img alt="#" class="w-30px me-3" src="assets/media/svg/files/doc.svg"/>
 																			<!--end::Icon-->
 																			<!--begin::Info-->
 																				<div
@@ -1805,7 +1805,7 @@
 																		<div
 																			class="d-flex flex-aligns-center">
 																			<!--begin::Icon-->
-																			<img alt="../../demo1/dist/apps/projects/project.html" class="w-30px me-3" src="assets/media/svg/files/css.svg"/>
+																			<img alt="#" class="w-30px me-3" src="assets/media/svg/files/css.svg"/>
 																			<!--end::Icon-->
 																			<!--begin::Info-->
 																				<div
@@ -1945,7 +1945,7 @@
 																			<!--begin::Info-->
 																				<div
 																				class="ms-1 fw-bold"> <!--begin::Desc-->
-																				<a href="../../demo1/dist/apps/projects/project.html" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
+																				<a href="#" class="fs-6 text-hover-primary fw-bolder">Finance KPI App Guidelines</a>
 																				<!--end::Desc-->
 																				<!--begin::Number-->
 																				<div class="text-gray-400">1.9mb</div>
@@ -1958,7 +1958,7 @@
 																		<div
 																			class="d-flex flex-aligns-center pe-10 pe-lg-20">
 																			<!--begin::Icon-->
-																			<img alt="../../demo1/dist/apps/projects/project.html" class="w-30px me-3" src="assets/media/svg/files/doc.svg"/>
+																			<img alt="#" class="w-30px me-3" src="assets/media/svg/files/doc.svg"/>
 																			<!--end::Icon-->
 																			<!--begin::Info-->
 																				<div
@@ -1976,7 +1976,7 @@
 																		<div
 																			class="d-flex flex-aligns-center">
 																			<!--begin::Icon-->
-																			<img alt="../../demo1/dist/apps/projects/project.html" class="w-30px me-3" src="assets/media/svg/files/css.svg"/>
+																			<img alt="#" class="w-30px me-3" src="assets/media/svg/files/css.svg"/>
 																			<!--end::Icon-->
 																			<!--begin::Info-->
 																				<div
