@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Facture;
+use App\Form\CommentaireAjoutType;
 use App\Repository\CommentaireRepository;
 use App\Repository\FactureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,8 +16,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConversationController extends AbstractController
 {
     #[Route('/', name: 'conversation')]
-    public function index(FactureRepository $factureRepository): Response
+    public function index(FactureRepository $factureRepository, Request $request): Response
     {
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireAjoutType::class, $commentaire);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+
+        }
         $user = $this->getUser();
         $factures = $factureRepository->factureConversation($user);
         return $this->render('conversation/index.html.twig', [

@@ -158,8 +158,8 @@ class FonctionBaseController extends AbstractController
                     $elementJointure ='App\\Entity\\'. ucfirst($div[0]);
                 }
             }
-            dump($elementJointure);
-            dd("Ok");
+            // dump($elementJointure);
+            // dd("Ok");
             
 
             $join_alias = [];
