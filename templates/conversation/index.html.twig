@@ -179,17 +179,17 @@
 								<div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
 									{% for facture in factures %}
 									<!--begin::User-->
-									<div class="d-flex flex-stack py-4">
+									<div class="d-flex flex-stack  py-4">
 										<!--begin::Details-->
 										<div class="d-flex align-items-center">
 											<!--begin::Avatar-->
 											<div class="symbol symbol-45px symbol-circle">
-												<span class="symbol-label bg-light-danger text-danger fs-6 fw-bolder">{{ facture.emetteur|slice(0, 1)|upper }}</span>
+												<span class="symbol-label bg-light-danger  text-danger fs-6 fw-bolder">{{ facture.emetteur|slice(0, 1)|upper }}</span>
 											</div>
 											<!--end::Avatar-->
 											<!--begin::Details-->
 											<div class="ms-5">
-												<a type="button" aller="{{facture.id }}" class="clickajax fs-5 fw-bolder text-gray-900 text-hover-primary mb-2" data-value="{{facture.emetteur}}">{{facture.emetteur}}</a>
+												<a type="button" emetteur  aller="{{facture.id }}" class="clickajax fs-5 fw-bolder text-gray-900 text-hover-primary mb-2" data-value="{{facture.emetteur}}">{{facture.emetteur}}</a>
 												<div class="fw-bold text-muted">{{facture.montantFac }}</div>
 											</div>
 											<!--end::Details-->

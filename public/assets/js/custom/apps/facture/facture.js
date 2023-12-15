@@ -36,6 +36,7 @@ var GESTIONFACTURE = function () {
             console.log("OK");
             calculMontantParQte('.qte');
             calculMontantParValeur('.valeur');
+            montantTotal();
             const removeFormButton = form.querySelectorAll('button.remove');
             let succes = false;
             removeFormButton.forEach(btnremove => {
@@ -47,6 +48,7 @@ var GESTIONFACTURE = function () {
                 desactiverSelect();    
                 form.remove();
                 calculMontantGlobal();
+                montantTotal();
                 
             });
         })
@@ -129,6 +131,13 @@ var GESTIONFACTURE = function () {
             }
         });
         $("#facture_montantFac").val(montant);
+    }
+
+    function montantTotal(){
+        $(".mntTo").keyup(function(){
+            console.log("Clique");
+            calculMontantGlobal();
+        });
     }
 
     function calculMontantParQte(element){
