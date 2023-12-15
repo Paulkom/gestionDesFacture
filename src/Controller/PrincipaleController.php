@@ -63,8 +63,6 @@ class PrincipaleController extends AbstractController
             AND sm.roles IN (:val)
             "
         )->setParameter('val',$userRoles)
-        // LEFT JOIN m.sousMenus sm AND sm.roles IN (:val)
-        // ->setParameter('val',$userRoles)
         ->getResult();
         return $this->render('layouts/menu.html.twig', compact('menus'));
     }

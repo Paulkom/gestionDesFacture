@@ -54,7 +54,7 @@
 						<!--end::Svg Icon-->Filter</a>
 						<!--end::Menu toggle-->
 						<!--begin::Menu 1-->
-						<div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_624445cc83972">
+						{# <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_624445cc83972">
 							<!--begin::Header-->
 							<div class="px-7 py-5">
 								<div class="fs-5 text-dark fw-bolder">Filter Options</div>
@@ -127,7 +127,7 @@
 								<!--end::Actions-->
 							</div>
 							<!--end::Form-->
-						</div>
+						</div> #}
 						<!--end::Menu 1-->
 					</div>
 					<!--end::Filter menu-->
@@ -365,8 +365,8 @@ console.log(userId);
 					data: {id: id,},
                     type:'post',
 					beforeSend: function () {
-                                        ajaxBeforeSend();
-                                    },
+						ajaxBeforeSend();
+					},
                     success: function(data) {
                         var html = "";
 						console.log(data);
