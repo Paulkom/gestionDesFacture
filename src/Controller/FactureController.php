@@ -50,8 +50,10 @@ class FactureController extends AbstractController
             $commentaire->setFacture($facture);
             $commentaire->setObjet("Nouvelle Facture émise");
             $commentaire->setExpediteur($this->getUser());
-            if($this->getUser()->isEstAdmin()){
+            if(!$this->getUser()->isEstAdmin()){
                 $commentaire->setDestinataire($admin);
+            }else{
+                $commentaire->setDestinataire($factureRepository->find($facture->getActeur()));
             }
             $commentaire->setMessage("Veuillez recevoir, Mme/Mr la personne chargée de l'étude des factures, la facture suivante pour évaluation. Merci");
             $commentaireRepository->add($commentaire);
@@ -120,7 +122,7 @@ class FactureController extends AbstractController
     }
 
     #[Route('/{id}/show', name: 'facture_show',  methods: ['GET', 'POST'])]
-    public function show2(Facture $facture, SmsEnvoie $sms, Request $request, CommentaireRepository $commentaireRepository, UtilisateurRepository $userresp): Response
+    public function show2(Facture $facture, SmsEnvoie $sms, FactureRepository $factureRepository, Request $request, CommentaireRepository $commentaireRepository, UtilisateurRepository $userresp): Response
     {
         $commentaires = $commentaireRepository->troisDerniersCommentaireDeFacture($facture);
         if($this->getUser()->isEstAdmin() == true){
@@ -135,8 +137,10 @@ class FactureController extends AbstractController
                 $commentaire->setObjet("Réponse");
                 $commentaire->setEstLue(false);
                 $commentaire->setExpediteur($this->getUser());
-                if($this->getUser()->isEstAdmin()){
+                if(!$this->getUser()->isEstAdmin()){
                     $commentaire->setDestinataire($admin);
+                }else{
+                    $commentaire->setDestinataire($factureRepository->find($facture->getActeur()));
                 }
                 //dd($commentaire);
                 $sms->sendSms("+22998428515","",$commentaire->getMessage());

@@ -5,352 +5,352 @@
 {% block body %}
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
        <div class="toolbar" id="kt_toolbar">
-							<!--begin::Container-->
-							<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
-								<!--begin::Page title-->
-								<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-									<!--begin::Title-->
-									<h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Mes conversations</h1>
-									<!--end::Title-->
-									<!--begin::Separator-->
-									<span class="h-20px border-gray-300 border-start mx-4"></span>
-									<!--end::Separator-->
-									<!--begin::Breadcrumb-->
-									<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
-										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">
-											<a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Acceuil</a>
-										</li>
-										<!--end::Item-->
-										<!--begin::Item-->
-										<li class="breadcrumb-item">
-											<span class="bullet bg-gray-300 w-5px h-2px"></span>
-										</li>
-										<!--end::Item-->
-										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">Conversation</li>
-										<!--end::Item-->
-										<!--begin::Item-->
-										<li class="breadcrumb-item">
-											<span class="bullet bg-gray-300 w-5px h-2px"></span>
-										</li>
-										
-									</ul>
-									<!--end::Breadcrumb-->
-								</div>
-								<!--end::Page title-->
-								<!--begin::Actions-->
-								<div class="d-flex align-items-center gap-2 gap-lg-3">
-									<!--begin::Filter menu-->
-									<div class="m-0">
-										<!--begin::Menu toggle-->
-										<a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-										<!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-										<span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-												<path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
-											</svg>
-										</span>
-										<!--end::Svg Icon-->Filter</a>
-										<!--end::Menu toggle-->
-										<!--begin::Menu 1-->
-										<div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_624445cc83972">
-											<!--begin::Header-->
-											<div class="px-7 py-5">
-												<div class="fs-5 text-dark fw-bolder">Filter Options</div>
-											</div>
-											<!--end::Header-->
-											<!--begin::Menu separator-->
-											<div class="separator border-gray-200"></div>
-											<!--end::Menu separator-->
-											<!--begin::Form-->
-											<div class="px-7 py-5">
-												<!--begin::Input group-->
-												<div class="mb-10">
-													<!--begin::Label-->
-													<label class="form-label fw-bold">Status:</label>
-													<!--end::Label-->
-													<!--begin::Input-->
-													<div>
-														<select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_624445cc83972" data-allow-clear="true">
-															<option></option>
-															<option value="1">Approved</option>
-															<option value="2">Pending</option>
-															<option value="2">In Process</option>
-															<option value="2">Rejected</option>
-														</select>
-													</div>
-													<!--end::Input-->
-												</div>
-												<!--end::Input group-->
-												<!--begin::Input group-->
-												<div class="mb-10">
-													<!--begin::Label-->
-													<label class="form-label fw-bold">Member Type:</label>
-													<!--end::Label-->
-													<!--begin::Options-->
-													<div class="d-flex">
-														<!--begin::Options-->
-														<label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-															<input class="form-check-input" type="checkbox" value="1" />
-															<span class="form-check-label">Author</span>
-														</label>
-														<!--end::Options-->
-														<!--begin::Options-->
-														<label class="form-check form-check-sm form-check-custom form-check-solid">
-															<input class="form-check-input" type="checkbox" value="2" checked="checked" />
-															<span class="form-check-label">Customer</span>
-														</label>
-														<!--end::Options-->
-													</div>
-													<!--end::Options-->
-												</div>
-												<!--end::Input group-->
-												<!--begin::Input group-->
-												<div class="mb-10">
-													<!--begin::Label-->
-													<label class="form-label fw-bold">Notifications:</label>
-													<!--end::Label-->
-													<!--begin::Switch-->
-													<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-														<input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-														<label class="form-check-label">Enabled</label>
-													</div>
-													<!--end::Switch-->
-												</div>
-												<!--end::Input group-->
-												<!--begin::Actions-->
-												<div class="d-flex justify-content-end">
-													<button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-													<button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-												</div>
-												<!--end::Actions-->
-											</div>
-											<!--end::Form-->
-										</div>
-										<!--end::Menu 1-->
+			<!--begin::Container-->
+			<div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+				<!--begin::Page title-->
+				<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+					<!--begin::Title-->
+					<h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Mes conversations</h1>
+					<!--end::Title-->
+					<!--begin::Separator-->
+					<span class="h-20px border-gray-300 border-start mx-4"></span>
+					<!--end::Separator-->
+					<!--begin::Breadcrumb-->
+					<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">
+							<a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">Acceuil</a>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-300 w-5px h-2px"></span>
+						</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item text-muted">Conversation</li>
+						<!--end::Item-->
+						<!--begin::Item-->
+						<li class="breadcrumb-item">
+							<span class="bullet bg-gray-300 w-5px h-2px"></span>
+						</li>
+						
+					</ul>
+					<!--end::Breadcrumb-->
+				</div>
+				<!--end::Page title-->
+				<!--begin::Actions-->
+				<div class="d-flex align-items-center gap-2 gap-lg-3">
+					<!--begin::Filter menu-->
+					<div class="m-0">
+						<!--begin::Menu toggle-->
+						<a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+						<!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+						<span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+								<path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
+							</svg>
+						</span>
+						<!--end::Svg Icon-->Filter</a>
+						<!--end::Menu toggle-->
+						<!--begin::Menu 1-->
+						<div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_624445cc83972">
+							<!--begin::Header-->
+							<div class="px-7 py-5">
+								<div class="fs-5 text-dark fw-bolder">Filter Options</div>
+							</div>
+							<!--end::Header-->
+							<!--begin::Menu separator-->
+							<div class="separator border-gray-200"></div>
+							<!--end::Menu separator-->
+							<!--begin::Form-->
+							<div class="px-7 py-5">
+								<!--begin::Input group-->
+								<div class="mb-10">
+									<!--begin::Label-->
+									<label class="form-label fw-bold">Status:</label>
+									<!--end::Label-->
+									<!--begin::Input-->
+									<div>
+										<select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_624445cc83972" data-allow-clear="true">
+											<option></option>
+											<option value="1">Approved</option>
+											<option value="2">Pending</option>
+											<option value="2">In Process</option>
+											<option value="2">Rejected</option>
+										</select>
 									</div>
-									<!--end::Filter menu-->
-									<!--begin::Secondary button-->
-									<!--end::Secondary button-->
-									<!--begin::Primary button-->
-									<a href="../../demo1/dist/.html" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
-									<!--end::Primary button-->
+									<!--end::Input-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="mb-10">
+									<!--begin::Label-->
+									<label class="form-label fw-bold">Member Type:</label>
+									<!--end::Label-->
+									<!--begin::Options-->
+									<div class="d-flex">
+										<!--begin::Options-->
+										<label class="form-check form-check-sm form-check-custom form-check-solid me-5">
+											<input class="form-check-input" type="checkbox" value="1" />
+											<span class="form-check-label">Author</span>
+										</label>
+										<!--end::Options-->
+										<!--begin::Options-->
+										<label class="form-check form-check-sm form-check-custom form-check-solid">
+											<input class="form-check-input" type="checkbox" value="2" checked="checked" />
+											<span class="form-check-label">Customer</span>
+										</label>
+										<!--end::Options-->
+									</div>
+									<!--end::Options-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="mb-10">
+									<!--begin::Label-->
+									<label class="form-label fw-bold">Notifications:</label>
+									<!--end::Label-->
+									<!--begin::Switch-->
+									<div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
+										<input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
+										<label class="form-check-label">Enabled</label>
+									</div>
+									<!--end::Switch-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Actions-->
+								<div class="d-flex justify-content-end">
+									<button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
+									<button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
 								</div>
 								<!--end::Actions-->
 							</div>
-							<!--end::Container-->
+							<!--end::Form-->
 						</div>
-						<!--end::Toolbar-->
-						<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
-							<!--begin::Container-->
-							<div id="kt_content_container" class="container-xxl">
-								<!--begin::Layout-->
-								<div class="d-flex flex-column flex-lg-row">
-									<!--begin::Sidebar-->
-									<div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
-										<!--begin::Contacts-->
-										<div class="card card-flush">
-											<!--begin::Card header-->
-											<div class="card-header pt-7" id="kt_chat_contacts_header">
-												<!--begin::Form-->
-												<form class="w-100 position-relative" autocomplete="off">
-													<!--begin::Icon-->
-													<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-													<span class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
-														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-															<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
-															<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
-														</svg>
-													</span>
-													<!--end::Svg Icon-->
-													<!--end::Icon-->
-													<!--begin::Input-->
-													<input type="text" class="form-control form-control-solid px-15" name="search" value="" placeholder="Entrer un code ou un montant." />
-													<!--end::Input-->
-												</form>
-												<!--end::Form-->
-											</div>
-											<!--end::Card header-->
-											<!--begin::Card body-->
-											<div class="card-body pt-5" id="kt_chat_contacts_body">
-												<!--begin::List-->
-												<div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
-													{% for facture in factures %}
-													<!--begin::User-->
-													<div class="d-flex flex-stack py-4">
-														<!--begin::Details-->
-														<div class="d-flex align-items-center">
-															<!--begin::Avatar-->
-															<div class="symbol symbol-45px symbol-circle">
-																<span class="symbol-label bg-light-danger text-danger fs-6 fw-bolder">M</span>
-															</div>
-															<!--end::Avatar-->
-															<!--begin::Details-->
-															<div class="ms-5">
-																<a type="button" aller="{{facture.id }}" class="clickajax fs-5 fw-bolder text-gray-900 text-hover-primary mb-2" data-value="{{facture.emetteur}}">{{facture.emetteur}}</a>
-																<div class="fw-bold text-muted">{{facture.montantFac }}</div>
-															</div>
-															<!--end::Details-->
-														</div>
-														<!--end::Details-->
-														<!--begin::Lat seen-->
-														<div class="d-flex flex-column align-items-end ms-2">
-															<span class="text-muted fs-7 mb-1">{{facture.refFact}}</span>
-														</div>
-														<!--end::Lat seen-->
-													</div>
-													<!--end::User-->
-													<!--begin::Separator-->
-													<div class="separator separator-dashed d-none"></div>
-													<!--end::Separator-->
-													{% endfor %}
-												</div>
-												<!--end::List-->
-											</div>
-											<!--end::Card body-->
-										</div>
-										<!--end::Contacts-->
-									</div>
-									<!--end::Sidebar-->
-									<!--begin::Content-->
-									<div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
-										<!--begin::Messenger-->
-										<div class="card" id="kt_chat_messenger">
-											<!--begin::Card header-->
-											<div class="card-header" id="kt_chat_messenger_header">
-												<!--begin::Title-->
-												<div class="card-title">
-													<!--begin::User-->
-													<div class="d-flex justify-content-center flex-column me-3">
-														<a id="conversation_sup" ele="" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">XXX XXXXXX</a>
-														<!--begin::Info-->
-														<div class="mb-0 lh-1">
-															<span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
-															<span class="fs-7 fw-bold text-muted">Active</span>
-														</div>
-														<!--end::Info-->
-													</div>
-													<!--end::User-->
-												</div>
-												<!--end::Title-->
-												<!--begin::Card toolbar-->
-												<div class="card-toolbar">
-													<!--begin::Menu-->
-													<div class="me-n3">
-														<button class="btn btn-sm btn-icon btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-															<i class="bi bi-three-dots fs-2"></i>
-														</button>
-														<!--begin::Menu 3-->
-														<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
-															<!--begin::Heading-->
-															<div class="menu-item px-3">
-																<div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Contacts</div>
-															</div>
-															<!--end::Heading-->
-															<!--begin::Menu item-->
-															<div class="menu-item px-3">
-																<a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Add Contact</a>
-															</div>
-															<!--end::Menu item-->
-															<!--begin::Menu item-->
-															<div class="menu-item px-3">
-																<a href="#" class="menu-link flex-stack px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">Invite Contacts
-																<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a contact email to send an invitation"></i></a>
-															</div>
-															<!--end::Menu item-->
-															<!--begin::Menu item-->
-															<div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
-																<a href="#" class="menu-link px-3">
-																	<span class="menu-title">Groups</span>
-																	<span class="menu-arrow"></span>
-																</a>
-																<!--begin::Menu sub-->
-																<div class="menu-sub menu-sub-dropdown w-175px py-4">
-																	<!--begin::Menu item-->
-																	<div class="menu-item px-3">
-																		<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Create Group</a>
-																	</div>
-																	<!--end::Menu item-->
-																	<!--begin::Menu item-->
-																	<div class="menu-item px-3">
-																		<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Invite Members</a>
-																	</div>
-																	<!--end::Menu item-->
-																	<!--begin::Menu item-->
-																	<div class="menu-item px-3">
-																		<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Settings</a>
-																	</div>
-																	<!--end::Menu item-->
-																</div>
-																<!--end::Menu sub-->
-															</div>
-															<!--end::Menu item-->
-															<!--begin::Menu item-->
-															<div class="menu-item px-3 my-1">
-																<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Settings</a>
-															</div>
-															<!--end::Menu item-->
-														</div>
-														<!--end::Menu 3-->
-													</div>
-													<!--end::Menu-->
-												</div>
-												<!--end::Card toolbar-->
-											</div>
-											<!--end::Card header-->
-											<!--begin::Card body-->
-											<div class="card-body" id="kt_chat_messenger_body">
-												<!--begin::Messages-->
-												<div id="message" data-facture="" class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
-												</div>
-												<!--end::Messages-->
-											</div>
-											<!--end::Card body-->
-											<!--begin::Card footer-->
-											{{ form_start(form) }}
-												{{ form_widget(form.facture) }}
-											<div class="card-footer pt-4" id="kt_chat_messenger_footer">
-												<!--begin::Input-->
-												{{ form_widget(form.message) }}
-												{# <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Ecrivez un commentaire"></textarea> #}
-												<!--end::Input-->
-												<!--begin:Toolbar-->
-												<div class="d-flex flex-stack">
-												<!--begin::Actions-->
-													<div class="d-flex align-items-center me-2">
-														<button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-															<i class="bi bi-paperclip fs-3"></i>
-														</button>
-
-														<button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
-															<i class="bi bi-upload fs-3"></i>
-														</button>
-													</div>
-													<!--end::Actions-->
-													<!--begin::Send-->
-													<button type="submit" id="vladi" data-kt-cond-type="submit" class="btn btn-primary">
-														<span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer</span>
-														<span class="indicator-progress">Veuillez patienter svp...
-															<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-														</span>
-													</button>
-													<!--end::Send-->
-												</div>
-												<!--end::Toolbar-->
-											</div>
-											{{ form_end(form) }}
-											<!--end::Card footer-->
-										</div>
-										<!--end::Messenger-->
-									</div>
-									<!--end::Content-->
-								</div>
+						<!--end::Menu 1-->
+					</div>
+					<!--end::Filter menu-->
+					<!--begin::Secondary button-->
+					<!--end::Secondary button-->
+					<!--begin::Primary button-->
+					<a href="../../demo1/dist/.html" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
+					<!--end::Primary button-->
+				</div>
+				<!--end::Actions-->
+			</div>
+			<!--end::Container-->
+		</div>
+		<!--end::Toolbar-->
+		<!--begin::Post-->
+		<div class="post d-flex flex-column-fluid" id="kt_post">
+			<!--begin::Container-->
+			<div id="kt_content_container" class="container-xxl">
+				<!--begin::Layout-->
+				<div class="d-flex flex-column flex-lg-row">
+					<!--begin::Sidebar-->
+					<div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
+						<!--begin::Contacts-->
+						<div class="card card-flush">
+							<!--begin::Card header-->
+							<div class="card-header pt-7" id="kt_chat_contacts_header">
+								<!--begin::Form-->
+								<form class="w-100 position-relative" autocomplete="off">
+									<!--begin::Icon-->
+									<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+									<span class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+											<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+											<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+										</svg>
+									</span>
+									<!--end::Svg Icon-->
+									<!--end::Icon-->
+									<!--begin::Input-->
+									<input type="text" class="form-control form-control-solid px-15" name="search" value="" placeholder="Entrer un code ou un montant." />
+									<!--end::Input-->
+								</form>
+								<!--end::Form-->
 							</div>
-							<!--end::Container-->
+							<!--end::Card header-->
+							<!--begin::Card body-->
+							<div class="card-body pt-5" id="kt_chat_contacts_body">
+								<!--begin::List-->
+								<div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
+									{% for facture in factures %}
+									<!--begin::User-->
+									<div class="d-flex flex-stack py-4">
+										<!--begin::Details-->
+										<div class="d-flex align-items-center">
+											<!--begin::Avatar-->
+											<div class="symbol symbol-45px symbol-circle">
+												<span class="symbol-label bg-light-danger text-danger fs-6 fw-bolder">{{ facture.emetteur|slice(0, 1)|upper }}</span>
+											</div>
+											<!--end::Avatar-->
+											<!--begin::Details-->
+											<div class="ms-5">
+												<a type="button" aller="{{facture.id }}" class="clickajax fs-5 fw-bolder text-gray-900 text-hover-primary mb-2" data-value="{{facture.emetteur}}">{{facture.emetteur}}</a>
+												<div class="fw-bold text-muted">{{facture.montantFac }}</div>
+											</div>
+											<!--end::Details-->
+										</div>
+										<!--end::Details-->
+										<!--begin::Lat seen-->
+										<div class="d-flex flex-column align-items-end ms-2">
+											<span class="text-muted fs-7 mb-1">{{facture.refFact}}</span>
+										</div>
+										<!--end::Lat seen-->
+									</div>
+									<!--end::User-->
+									<!--begin::Separator-->
+									<div class="separator separator-dashed d-none"></div>
+									<!--end::Separator-->
+									{% endfor %}
+								</div>
+								<!--end::List-->
+							</div>
+							<!--end::Card body-->
 						</div>
-						<!--end::Post-->
+						<!--end::Contacts-->
+					</div>
+					<!--end::Sidebar-->
+					<!--begin::Content-->
+					<div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+						<!--begin::Messenger-->
+						<div class="card" id="kt_chat_messenger">
+							<!--begin::Card header-->
+							<div class="card-header" id="kt_chat_messenger_header">
+								<!--begin::Title-->
+								<div class="card-title">
+									<!--begin::User-->
+									<div class="d-flex justify-content-center flex-column me-3">
+										<a id="conversation_sup" ele="" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">XXX XXXXXX</a>
+										<!--begin::Info-->
+										<div class="mb-0 lh-1">
+											<span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
+											<span class="fs-7 fw-bold text-muted">Active</span>
+										</div>
+										<!--end::Info-->
+									</div>
+									<!--end::User-->
+								</div>
+								<!--end::Title-->
+								<!--begin::Card toolbar-->
+								<div class="card-toolbar">
+									<!--begin::Menu-->
+									<div class="me-n3">
+										<button class="btn btn-sm btn-icon btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+											<i class="bi bi-three-dots fs-2"></i>
+										</button>
+										<!--begin::Menu 3-->
+										<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
+											<!--begin::Heading-->
+											<div class="menu-item px-3">
+												<div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Contacts</div>
+											</div>
+											<!--end::Heading-->
+											<!--begin::Menu item-->
+											<div class="menu-item px-3">
+												<a href="#" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Add Contact</a>
+											</div>
+											<!--end::Menu item-->
+											<!--begin::Menu item-->
+											<div class="menu-item px-3">
+												<a href="#" class="menu-link flex-stack px-3" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">Invite Contacts
+												<i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a contact email to send an invitation"></i></a>
+											</div>
+											<!--end::Menu item-->
+											<!--begin::Menu item-->
+											<div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
+												<a href="#" class="menu-link px-3">
+													<span class="menu-title">Groups</span>
+													<span class="menu-arrow"></span>
+												</a>
+												<!--begin::Menu sub-->
+												<div class="menu-sub menu-sub-dropdown w-175px py-4">
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Create Group</a>
+													</div>
+													<!--end::Menu item-->
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Invite Members</a>
+													</div>
+													<!--end::Menu item-->
+													<!--begin::Menu item-->
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Settings</a>
+													</div>
+													<!--end::Menu item-->
+												</div>
+												<!--end::Menu sub-->
+											</div>
+											<!--end::Menu item-->
+											<!--begin::Menu item-->
+											<div class="menu-item px-3 my-1">
+												<a href="#" class="menu-link px-3" data-bs-toggle="tooltip" title="Coming soon">Settings</a>
+											</div>
+											<!--end::Menu item-->
+										</div>
+										<!--end::Menu 3-->
+									</div>
+									<!--end::Menu-->
+								</div>
+								<!--end::Card toolbar-->
+							</div>
+							<!--end::Card header-->
+							<!--begin::Card body-->
+							<div class="card-body" id="kt_chat_messenger_body">
+								<!--begin::Messages-->
+								<div id="message" data-facture="" class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
+								</div>
+								<!--end::Messages-->
+							</div>
+							<!--end::Card body-->
+							<!--begin::Card footer-->
+							{{ form_start(form) }}
+								{{ form_widget(form.facture) }}
+							<div class="card-footer pt-4" id="kt_chat_messenger_footer">
+								<!--begin::Input-->
+								{{ form_widget(form.message) }}
+								{# <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Ecrivez un commentaire"></textarea> #}
+								<!--end::Input-->
+								<!--begin:Toolbar-->
+								<div class="d-flex flex-stack">
+								<!--begin::Actions-->
+									<div class="d-flex align-items-center me-2">
+										<button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
+											<i class="bi bi-paperclip fs-3"></i>
+										</button>
+
+										<button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
+											<i class="bi bi-upload fs-3"></i>
+										</button>
+									</div>
+									<!--end::Actions-->
+									<!--begin::Send-->
+									<button type="submit" id="vladi" data-kt-cond-type="submit" class="btn btn-primary">
+										<span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer</span>
+										<span class="indicator-progress">Veuillez patienter svp...
+											<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+										</span>
+									</button>
+									<!--end::Send-->
+								</div>
+								<!--end::Toolbar-->
+							</div>
+							{{ form_end(form) }}
+							<!--end::Card footer-->
+						</div>
+						<!--end::Messenger-->
+					</div>
+					<!--end::Content-->
+				</div>
+			</div>
+			<!--end::Container-->
+		</div>
+		<!--end::Post-->
     </div>
 {% endblock %}
 {% block javascripts %}
@@ -369,16 +369,18 @@ console.log(userId);
                                     },
                     success: function(data) {
                         var html = "";
+						console.log(data);
 						for(var i=0; i < data.length; i++){
+							let lettre =(data[i]["expe"]).split('')[0];
 							html = html + (userId == data[i]["id"] ? '<div class="d-flex justify-content-start mb-10">' : '<div class="d-flex justify-content-end mb-10">' )+
 															
 									(userId == data[i]["id"] ? '<div class="d-flex flex-column align-items-start">':'<div class="d-flex flex-column align-items-end">' ) +
 										'<div class="d-flex align-items-center mb-2">'+
 											'<div class="symbol symbol-35px symbol-circle">'+
-												'<img alt="Pic" src="assets/media/avatars/300-25.jpg" />'+
+												'<span class="symbol-label bg-light-danger text-danger fs-6 fw-bolder">'+ lettre +'</span>'+
 											'</div>'+
 											'<div class="ms-3">'+
-												'<a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">'+ (userId == data[i]["id"] ? 'Moi-même' : acteur) +'</a>'+
+												'<a href="#" class="fs-5 fw-bolder text-gray-900 text-hover-primary me-1">'+ (userId == data[i]["id"] ? 'Moi-même' : data[i]["expe"]) +'</a>'+
 												'<span class="text-muted fs-7 mb-1">2 mins</span>'+
 											'</div>'+
 										'</div>'+
@@ -431,6 +433,8 @@ console.log(userId);
 						console.log(data);
 						if(data == "Ok"){
  							getCommentaires(facture,valeu);
+						}else{
+							toastr.error("Il y a un problème")
 						}
                     },
 					complete: function () {

@@ -51,14 +51,18 @@ class PrincipaleController extends AbstractController
 
     public function afficherMenus(MenuRepository $menuRepository, EntityManagerInterface $em)
     {
+        $user = $this->getUser();
+        $userRoles = $user->getRoles();
+
         $menus = $em->createQuery("
             SELECT m
             FROM App\Entity\Menu m
             LEFT JOIN m.menuSuperieur ms
             LEFT JOIN m.sousMenus sm
             WHERE ms IS NULL
+            AND sm.roles IN (:val)
             "
-        )
+        )->setParameter('val',$userRoles)
         // LEFT JOIN m.sousMenus sm AND sm.roles IN (:val)
         // ->setParameter('val',$userRoles)
         ->getResult();

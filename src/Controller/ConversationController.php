@@ -58,8 +58,10 @@ class ConversationController extends AbstractController
             $commentaire->setFacture($facture);
             $commentaire->setEstLue(false);
             $commentaire->setExpediteur($this->getUser());
-            if($this->getUser()->isEstAdmin()){
+            if(!$this->getUser()->isEstAdmin()){
                 $commentaire->setDestinataire($admin);
+            }else{
+                $commentaire->setDestinataire($factureRepository->find($facture->getActeur()));
             }
             // $commentaire->setDestinataire($userresp->find((int)$facture->getActeur()));
             // $commentaire->setExpediteur($this->getUser());
