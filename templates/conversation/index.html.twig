@@ -224,7 +224,7 @@
 												<div class="card-title">
 													<!--begin::User-->
 													<div class="d-flex justify-content-center flex-column me-3">
-														<a id="conversation_sup" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian Cox</a>
+														<a id="conversation_sup" ele="" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">XXX XXXXXX</a>
 														<!--begin::Info-->
 														<div class="mb-0 lh-1">
 															<span class="badge badge-success badge-circle w-10px h-10px me-1"></span>
@@ -309,28 +309,38 @@
 											</div>
 											<!--end::Card body-->
 											<!--begin::Card footer-->
+											{{ form_start(form) }}
+												{{ form_widget(form.facture) }}
 											<div class="card-footer pt-4" id="kt_chat_messenger_footer">
 												<!--begin::Input-->
-												<textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Ecrivez un commentaire"></textarea>
+												{{ form_widget(form.message) }}
+												{# <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Ecrivez un commentaire"></textarea> #}
 												<!--end::Input-->
 												<!--begin:Toolbar-->
 												<div class="d-flex flex-stack">
-													<!--begin::Actions-->
+												<!--begin::Actions-->
 													<div class="d-flex align-items-center me-2">
 														<button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
 															<i class="bi bi-paperclip fs-3"></i>
 														</button>
+
 														<button class="btn btn-sm btn-icon btn-active-light-primary me-1" type="button" data-bs-toggle="tooltip" title="Coming soon">
 															<i class="bi bi-upload fs-3"></i>
 														</button>
 													</div>
 													<!--end::Actions-->
 													<!--begin::Send-->
-													<button class="btn btn-primary" id="envoie" type="button" data-kt-element="send">Envoyer</button>
+													<button type="submit" id="vladi" data-kt-cond-type="submit" class="btn btn-primary">
+														<span class="indicator-label"> <i class="fa fa-plus"></i> Enregistrer</span>
+														<span class="indicator-progress">Veuillez patienter svp...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+														</span>
+													</button>
 													<!--end::Send-->
 												</div>
 												<!--end::Toolbar-->
 											</div>
+											{{ form_end(form) }}
 											<!--end::Card footer-->
 										</div>
 										<!--end::Messenger-->
@@ -347,6 +357,7 @@
 {{ parent() }}
 <script>
 let userId = {{ app.user.id }};
+console.log(userId);
  		function getCommentaires(id,acteur){
                 $.ajax({
                     url: "{{ path('conversation_get_commentaire') }}",
@@ -387,11 +398,46 @@ let userId = {{ app.user.id }};
                 });        
             }
 			$(".clickajax").click(function(){
+				let id = $(this).attr("aller");
+				$("#commentaire2_ajout_facture").val(id);
 				let valeu = $(this).data("value");
 				$("#conversation_sup").text(valeu);
-				let id = $(this).attr("aller");
 				console.log(valeu,id);
 				getCommentaires(id,valeu);
+			});
+			$("#vladi").click(function(e){
+				e.preventDefault();
+				var message = $("#commentaire2_ajout_message").val();
+				var facture = $("#commentaire2_ajout_facture").val();
+				var valeu = $("#conversation_sup").text();
+
+				if(facture == ""){
+					toastr.error("Veuillez selectionner une facture avant");
+					return false;
+				}
+				if(message == ""){
+					toastr.error("Veuillez écrire un message");
+					return false;
+				}
+				$.ajax({
+                    url: "{{ path('conversation_message') }}",
+                    dataType: 'Json',
+					data: {facture: facture, message:message,},
+                    type:'post',
+					beforeSend: function () {
+						ajaxBeforeSend();
+					},
+                    success: function(data) {
+						console.log(data);
+						if(data == "Ok"){
+ 							getCommentaires(facture,valeu);
+						}
+                    },
+					complete: function () {
+                        document.body.classList.remove('page-loading');
+                        document.body.removeAttribute('data-kt-app-page-loading');
+                    }
+                }); 
 			});
 </script>
 {% endblock %}

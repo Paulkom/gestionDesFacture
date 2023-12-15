@@ -33,7 +33,7 @@ class FactureController extends AbstractController
 {
 
     #[Route('/', name: 'facture_index', methods: ['GET', 'POST'])]
-    public function index(Request $request,MailerInterface $mailer,EntityManagerInterface $entityManager, CommentaireRepository $commentaireRepository, SocieteRepository $societeRepository, FactureRepository $factureRepository): Response
+    public function index(Request $request,UtilisateurRepository $userresp, MailerInterface $mailer,EntityManagerInterface $entityManager, CommentaireRepository $commentaireRepository, SocieteRepository $societeRepository, FactureRepository $factureRepository): Response
     {
         $facture = new Facture();
         
@@ -41,6 +41,7 @@ class FactureController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             
+            $admin = $userresp->findOneBy(["estAdmin"=>1, "estSup"=>0]);
             $facture->setEstSup(0);
             $facture->setMontantRest($facture->getMontantFac());
             $facture->setActeur(($this->getUser())->getId());
@@ -48,12 +49,16 @@ class FactureController extends AbstractController
             $commentaire = new Commentaire();
             $commentaire->setFacture($facture);
             $commentaire->setObjet("Nouvelle Facture émise");
+            $commentaire->setExpediteur($this->getUser());
+            if($this->getUser()->isEstAdmin()){
+                $commentaire->setDestinataire($admin);
+            }
             $commentaire->setMessage("Veuillez recevoir, Mme/Mr la personne chargée de l'étude des factures, la facture suivante pour évaluation. Merci");
             $commentaireRepository->add($commentaire);
 
 
             
-// Envoie de mail
+            // Envoie de mail
             $email = (new Email())
             ->from('paulk379@gmail.com')
             ->to('paulkombieni12@gmail.com')
@@ -65,7 +70,8 @@ class FactureController extends AbstractController
             ->text('Sending emails is fun again!')
             ->html('<p>See Twig integration for better HTML integration!</p>');
             $mailer->send($email);
-/// Fin de l'envoie du mail
+            /// Fin de l'envoie du mail
+            
 
             if($facture->getId() != null){
                 $id = $facture->getId();
@@ -123,11 +129,15 @@ class FactureController extends AbstractController
             $form->handleRequest($request);
 
             if($form->isSubmitted()){
+                $admin = $userresp->findOneBy(["estAdmin"=>1, "estSup"=>0]);
                 $commentaire->setFacture($facture);
                 $commentaire->setExpediteur($this->getUser());
                 $commentaire->setObjet("Réponse");
                 $commentaire->setEstLue(false);
-                $commentaire->setDestinataire($userresp->find($facture->getActeur()));
+                $commentaire->setExpediteur($this->getUser());
+                if($this->getUser()->isEstAdmin()){
+                    $commentaire->setDestinataire($admin);
+                }
                 //dd($commentaire);
                 $sms->sendSms("+22998428515","",$commentaire->getMessage());
                 $commentaireRepository->add($commentaire);

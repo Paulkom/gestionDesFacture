@@ -58,6 +58,7 @@ function isInt(n) {
 function isFloat(n){
     return n !== "" && !isNaN(n) && Math.round(n) !== n;
 }
+
 function isElement (element) {
     return element instanceof Element || element instanceof HTMLDocument;
 }

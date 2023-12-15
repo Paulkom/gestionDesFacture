@@ -46,9 +46,6 @@ class ModePaiementController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/{id}", name="app_", methods={"GET"})
-    //  */
     #[Route('/{id}', name: 'mode_paiement_show', methods:["GET"])]
     public function show(ModePaiement $modePaiement): Response
     {

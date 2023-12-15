@@ -56,7 +56,7 @@ public function troisDerniersCommentaireDeFacture($facture): array
    public function commentairesDeFacture($facture): array
    {
        return $this->createQueryBuilder('c')
-            ->select("c.message, e.id, c.createdAt" )
+            ->select("c.message, e.id, CONCAT(e.nom,' ',e.prenom) as identi, c.createdAt" )
             ->leftJoin("c.expediteur","e")
             ->innerJoin("c.facture",'f')
            ->andWhere('f.id = :val')
