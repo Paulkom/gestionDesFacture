@@ -30,7 +30,7 @@ class Facture
 
     #[ORM\Column(type: Types::DECIMAL, precision: 30, scale: 2, nullable: true)]
     private ?string $montantRest = null;
-    
+
     #[ORM\OneToMany(mappedBy: 'facture', targetEntity: Paiement::class)]
     private Collection $paiements;
 

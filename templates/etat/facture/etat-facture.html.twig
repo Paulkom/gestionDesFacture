@@ -1,0 +1,94 @@
+<div class="card shadow-sm">
+    <div class="col-lg-12 col-sm-12 ">
+        <div class="bg-light-primary h-100 px-10 py-7" id="kt_docs_swapper_parent_2">
+            <div class="fw-bolder"><h3>Point des facture émises</h3></div>
+            <div class="card-title">
+              <form id="searchForm" action="{{ path('app_etat') }}" methode="GET" target="_blank">
+                <div class="row pt-4"> 
+                    <div class="col-sm-3 col-lg-3 ">
+                          <label class="form-label required" for="commande_client_dateLivPrev">Mot Clé</label>
+                        <div class="d-flex align-items-center position-relative ">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
+                                            height="2" rx="1" transform="rotate(45 17.0365 15.1223)"
+                                            fill="currentColor"/>
+                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                            fill="currentColor"/>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon -->
+                            <input type="text"  data-kt-etat-table-filter="recherche" id="recherche" name="recherche" class="form-control w-lg-300px ps-15" placeholder="Rechercher..."/>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                       <div class="mb-3 fv-row fv-plugins-icon-container">
+                            <label class="form-label required" for="">Date debut</label>
+                            <input data-kt-etat-table-filter="date1" type="date" id="date1" name="dateDebut" required="required" class="form-control mb-2 " placeholder="Date debut">
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                       <div class="mb-4 fv-row fv-plugins-icon-container">
+                            <label class="form-label required" for="">Date Fin</label>
+                            <input data-kt-etat-table-filter="date2" type="date" id="date2" name="dateFin" required="required" class="form-control mb-2 " placeholder="Date Fin">
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                    </div>
+                    {# <div class="col-sm-3 col-lg-3">
+                        <div class="mb-4 fv-row fv-plugins-icon-container">
+                            <label class="form-label" for="">Clients</label>
+                            <select data-kt-etat-table-filter="client" id="client" name="client" class="form-control mb-2 form-select" data-control="select2" >
+                                <option value="" >Sélectionnez un client</option>
+                                {% for cli in clients %}
+                                    <option value="{{cli.id }}">{{ cli }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+                    </div> #}
+                </div> 
+                </form> 
+                <div class="col-sm-12 col-lg-12">
+                    <div class="card-toolbar">
+                        <div class="d-flex justify-content-end">
+                            <div class="mx-4"> 
+                                <button data-kt-etat-table-filter="searchbtn"  class="btn btn-secondary mr-3">
+                                    <i class="la la-search"></i>Rechercher
+                                </button>
+                            </div>
+                            <a type="button" id="imp" onclick="imprimable()" typep="Point des factures émises" lien="{{path('app_etat')}}"  class="btn btn-primary ">
+                                <i class="la la-print"></i>IMPRIMER LE RESULTAT
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+                                            
+            
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table align-middle table-row-dashed fs-6 gy-5 kt_etat_table"
+                id="kt_stat_client_top"
+                data-est-etat="1"
+                data-entity-name="facture"
+                data-url="{{ path('app_etat_facture') }}"
+                data-table-columns="dateFact;refFact;montantFac;montantRest;statut">
+                <thead>
+                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                        <th class="min-w-125px">Date</th>
+                        <th class="min-w-125px end">Référence</th>
+                        <th class="min-w-125px">Montant Facture</th>
+                        <th class="min-w-125px end">Mnt Restant</th>
+                        <th class="min-w-125px end">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="fw-semibold text-gray-600">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

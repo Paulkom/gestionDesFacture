@@ -134,9 +134,9 @@ Class Parameters {
                 'roles'      =>'ROLE_CONFIGURATION',
                 'submenus'   => [
                     [
-                        'title'      => 'Liste des factures émises par collaborateur',
-                        'route'      => '',
-                        'roles'      =>'',
+                        'title'      => 'Stat Facture',
+                        'route'      => 'app_etat_point_entree',
+                        'roles'      =>'ROLE_ETAT_FACTURE_EMISE',
                     ],
                 ],
             ],
